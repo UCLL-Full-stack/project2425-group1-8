@@ -14,7 +14,7 @@ type CropInput={
         name:string;
         purchasePrice:number;
         marketPrice:number;
-        yield:number;
+        // yield:number;
         attentionRange:number;
         growthDuration:number;
 };

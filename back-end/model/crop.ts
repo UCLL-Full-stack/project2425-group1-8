@@ -3,7 +3,7 @@ export class Crop{
     private readonly name:string;
     private readonly purchasePrice:number;
     private readonly marketPrice:number;
-    private readonly yield:number;
+    // private readonly yield:number;
     private readonly attentionRange:number;
     private readonly growthDuration:number;
 
@@ -12,7 +12,7 @@ export class Crop{
         name:string;
         purchasePrice:number;
         marketPrice:number;
-        yield:number;
+        // yield:number;
         attentionRange:number;
         growthDuration:number;
     }){
@@ -20,7 +20,7 @@ export class Crop{
         this.name=crop.name;
         this.purchasePrice=crop.purchasePrice;
         this.marketPrice=crop.marketPrice;
-        this.yield=crop.yield;
+        // this.yield=crop.yield;
         this.attentionRange=crop.attentionRange;
         this.growthDuration=crop.growthDuration;
     }
@@ -37,23 +37,23 @@ export class Crop{
     getMarketPrice():number{
         return this.marketPrice;
     }
-    getYield():number{
-        return this.yield;
-    }
+    // getYield():number{
+    //     return this.yield;
+    // }
     getAttentionRange():number{
         return this.attentionRange;
     }
     getGrowthDuration():number{
         return this.growthDuration;
     }
-    
+
     equals(otherCrop:Crop):boolean{
         return (this.name===otherCrop.getName()&&
         this.purchasePrice===otherCrop.getPurchasePrice()&&
         this.marketPrice===otherCrop.getMarketPrice()&&
         this.attentionRange===otherCrop.getAttentionRange()&&
-        this.growthDuration===otherCrop.getGrowthDuration()&&
-        this.yield===otherCrop.getYield());
+        this.growthDuration===otherCrop.getGrowthDuration())
+        // this.yield===otherCrop.getYield());
     }
 
 
