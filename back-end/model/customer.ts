@@ -1,4 +1,5 @@
 import { Crop } from "./crop";
+import validator from 'validator';
 
 export class Customer{
     private readonly name:string;
@@ -13,6 +14,8 @@ export class Customer{
         email:string;
         cropPreference:Array<Crop>;
     }){
+        this.validate(customer);
+
         this.name=customer.name;
         this.address=customer.address;
         this.email=customer.email;
@@ -33,5 +36,20 @@ export class Customer{
 
     getCropPreference():Array<Crop>{
         return this.cropPreference;
+    }
+
+    validate(customer:{name:string;address:string;email:string;}){
+        if(customer.name ===null){
+            throw new Error('Name cannot be null');
+        }
+        if(customer.address ===null){
+            throw new Error('Address cannot be null');
+        }
+        if(customer.email ===null){
+            throw new Error('Email cannot be null');
+        }
+        if(!validator.isEmail(customer.email)){
+            throw new Error('Email format is invalid');
+        }
     }
 }

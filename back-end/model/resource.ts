@@ -33,4 +33,13 @@ export class Resource {
    getServiceStartDate():Date{
     return this.serviceStartDate;
    }
+
+   validate(resource:{name:string;serviceDuration:number;}){
+      if(resource.name ===null){
+          throw new Error('Name cannot be null');
+      }
+      if(resource.serviceDuration < 0){
+         throw new Error('serviceDuration cannot be negative');
+      }
+  }
 }
