@@ -11,7 +11,7 @@ test('given:valid values for farmer,when: getting the farmer,then:farmer is seen
     //when
     const farmer= new Farmer({
         name,
-        age,
+        // age,
         email,
         farmingPractice,
         farmSize       
@@ -19,7 +19,7 @@ test('given:valid values for farmer,when: getting the farmer,then:farmer is seen
 
     //then
     expect(farmer.getName()).toEqual(name);
-    expect(farmer.getAge()).toEqual(age);
+    // expect(farmer.getAge()).toEqual(age); we removed age;
     expect(farmer.getEmail()).toEqual(email);
     expect(farmer.getFarmingPractice()).toEqual(farmingPractice);
     expect(farmer.getfarmSize()).toEqual(farmSize);

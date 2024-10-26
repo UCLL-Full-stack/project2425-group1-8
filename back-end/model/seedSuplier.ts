@@ -1,5 +1,4 @@
 import { Crop } from "./crop";
-
 export class SeedSupplier{
     private readonly name:string;
     private readonly address:string;

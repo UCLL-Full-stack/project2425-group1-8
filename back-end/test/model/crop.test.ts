@@ -6,7 +6,7 @@ test('given:valid values for crop,when:crop is added,then:crop is added with tho
     const    name="maize";
     const   purchasePrice=10;
     const    marketPrice=40;
-    // const    yield=200;
+    const    totalYield=200;
     const   attentionRange=3;
     const   growthDuration=15;
 
@@ -15,6 +15,7 @@ test('given:valid values for crop,when:crop is added,then:crop is added with tho
         name,
         purchasePrice,
         marketPrice,
+        totalYield,
         attentionRange,
         growthDuration       
     });
@@ -24,6 +25,7 @@ test('given:valid values for crop,when:crop is added,then:crop is added with tho
     expect(crop.getPurchasePrice()).toEqual(purchasePrice);
     expect(crop.getAttentionRange()).toEqual(attentionRange);
     expect(crop.getMarketPrice()).toEqual(marketPrice);
+    expect(crop.getTotalYield()).toEqual(totalYield);
     expect(crop.getGrowthDuration()).toEqual(growthDuration);
 
 
