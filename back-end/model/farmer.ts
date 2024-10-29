@@ -1,3 +1,5 @@
+import validator from 'validator';
+
 export class Farmer{
     private readonly name:string;
     // private readonly age:number;
@@ -17,10 +19,23 @@ export class Farmer{
         this.email=farmer.email;
         this.farmingPractice=farmer.farmingPractice;
         this.farmSize=farmer.farmSize;
+        this.validate(farmer);
       
     }
 
-    
+    validate(farmer:{name:string;email:string;farmingPractice:string;farmSize:number;
+    }){
+        if(!farmer.name){
+            throw new Error('name must be provided');
+        }
+        if(!validator.isEmail(farmer.email)){
+            throw new Error('invalid email provided!')
+        }
+        if(farmer.farmSize<0){
+            throw new Error('farm size can not be negative!!')
+        }
+    }
+
     getName():string{
         return this.name;
     }

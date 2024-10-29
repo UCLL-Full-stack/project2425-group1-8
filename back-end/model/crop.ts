@@ -1,7 +1,7 @@
 export class Crop{
     private readonly id?:number;
     private readonly name:string;
-    private readonly purchasePrice:number;
+    private readonly purchasePrice:number|undefined;
     private readonly marketPrice:number;
     private readonly totalYield:number;
     private readonly attentionRange:number;
@@ -16,6 +16,7 @@ export class Crop{
         attentionRange:number;
         growthDuration:number;
     }){
+        this.validate(crop);
         this.id=crop.id;
         this.name=crop.name;
         this.purchasePrice=crop.purchasePrice;
@@ -24,6 +25,20 @@ export class Crop{
         this.attentionRange=crop.attentionRange;
         this.growthDuration=crop.growthDuration;
     }
+    validate(crop:{name:string;purchasePrice:number|undefined;marketPrice:number;totalYield:number;attentionRange:number;growthDuration:number;}){
+        if(!crop.name){
+            throw new Error('name must be provided');
+        }
+        // if(!crop.purchasePrice || crop.purchasePrice===undefined){
+        //     throw new Error('purchase price must be provided');
+        // }
+        // if(!crop.marketPrice){
+        //     throw new Error('market price must be provided');
+        // }
+        if(crop.attentionRange<1 || crop.attentionRange>5){
+            throw new Error('crop attention must be in range 1-5')
+        }
+    }
 
     getId():number|undefined{
         return this.id;
@@ -31,7 +46,7 @@ export class Crop{
     getName():string{
         return this.name;
     }
-    getPurchasePrice():number{
+    getPurchasePrice():number|undefined{
         return this.purchasePrice;
     }
     getMarketPrice():number{

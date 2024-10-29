@@ -7,6 +7,8 @@ import swaggerUi from 'swagger-ui-express';
 import { customerRouter } from './controller/customer.routes';
 import { seedSupplierRouter } from './controller/seedSupplier.routes';
 import { resourceRouter } from './controller/resource.routes';
+import { cropRouter } from './controller/crop.routes';
+import { farmerRouter } from './controller/farmer.routes';
 
 const app = express();
 dotenv.config();
@@ -18,6 +20,8 @@ app.use(bodyParser.json());
 app.use('/customers',customerRouter);
 app.use('/seedSuppliers',seedSupplierRouter);
 app.use('/resources',resourceRouter);
+app.use('/crops',cropRouter);
+app.use('/farmer',farmerRouter);
 
 app.get('/status', (req, res) => {
     res.json({ message: 'Back-end is running...' });
