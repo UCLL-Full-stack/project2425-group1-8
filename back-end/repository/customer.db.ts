@@ -19,7 +19,14 @@ const getAllCustomers=():Customer[]=>{
     return customers;
 };
 
-export default {getAllCustomers};
+const getCustomerByName=({name}:{name: string }):Customer | null=>{
+    return customers.find((customer)=>customer.getName()==name) || null;
+};
+
+export default {
+    getAllCustomers,
+    getCustomerByName
+};
 
 
 
