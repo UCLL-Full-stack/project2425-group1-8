@@ -102,4 +102,36 @@ customerRouter.post('/', async (req: Request, res: Response, next: NextFunction)
     }
 });
 
+
+/**
+ * @swagger
+ * /customers/{name}:
+ *  get:
+ *      summary: Get a customer by name.
+ *      parameters:
+ *          - in: path
+ *            name: name
+ *            schema:
+ *              type: string
+ *              required: true
+ *              description: The customer name.
+ *      responses:
+ *          200:
+ *              description: A customer object.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/Customer'
+ */
+customerRouter.get('/:name',async(req: Request,res:Response, next: NextFunction)=>{
+    try {
+        const customer=await customerService.getCustomerByName((req.params.name));
+        res.status(200).json(customer)
+    } catch (error) {
+        next(error);
+    }
+});
+
+
+
 export { customerRouter };

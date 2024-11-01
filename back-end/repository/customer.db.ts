@@ -32,7 +32,12 @@ const addCustomer = (customer:Customer):Customer=>{
     return customer;
 }
 
-export default {getAllCustomers,findCustomerByEmail,addCustomer};
+const getCustomerByName=({name}:{name: string }):Customer | null=>{
+    return customers.find((customer)=>customer.getName()==name) || null;
+};
+export default {getAllCustomers,findCustomerByEmail,addCustomer,getCustomerByName};
+
+
 
 
 
