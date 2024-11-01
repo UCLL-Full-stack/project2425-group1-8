@@ -35,16 +35,16 @@ export class SeedSupplier{
         return this.seedType;
     }
     validate(seedSupplier:{name:string;address:string;email:string;seedType:Crop}){
-        if(seedSupplier.name ===null){
+        if(!seedSupplier.name ){
             throw new Error('Name cannot be null');
         }
-        if(seedSupplier.address ===null){
+        if(!seedSupplier.address ){
             throw new Error('Address cannot be null');
         }
-        if(seedSupplier.email ===null){
+        if(!seedSupplier.email ){
             throw new Error('Email cannot be null');
         }
-        if(seedSupplier.seedType ===null){
+        if(!seedSupplier.seedType){
             throw new Error('SeedType cannot be null');
         }
     }

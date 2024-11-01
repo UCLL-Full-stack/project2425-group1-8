@@ -1,11 +1,14 @@
+import { Crop } from "../model/crop";
 import { Customer } from "../model/customer"
 
+const crop1=new Crop({name:"maize",purchasePrice:10,marketPrice:40,totalYield:200,attentionRange:3,growthDurationInMonths:15
+})
 const customers=[
     new Customer({
         name:"Alex",
         address:"Hassrode",
         email:"alex123@gmail.com",
-        cropPreference:[]
+        cropPreference:[crop1]
     }),
     new Customer({
         name:"Alexis",
@@ -19,7 +22,17 @@ const getAllCustomers=():Customer[]=>{
     return customers;
 };
 
-export default {getAllCustomers};
+const findCustomerByEmail=(email:string):Customer|undefined=>{
+    return customers.find(customer=>customer.getEmail()===email);
+
+}
+
+const addCustomer = (customer:Customer):Customer=>{
+    customers.push(customer);
+    return customer;
+}
+
+export default {getAllCustomers,findCustomerByEmail,addCustomer};
 
 
 

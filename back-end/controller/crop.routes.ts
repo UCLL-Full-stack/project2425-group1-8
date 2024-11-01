@@ -22,7 +22,7 @@
  *            attentionRange:
  *              type: number
  *              description: Crop attention range.
- *            growthDuration:
+ *            growthDurationInMonths:
  *              type: number
  *              description: Crop growth duration.
  */

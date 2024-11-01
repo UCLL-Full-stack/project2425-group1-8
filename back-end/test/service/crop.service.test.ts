@@ -8,14 +8,14 @@ const crops=[
             marketPrice:40,
             totalYield:200,
            attentionRange:3,
-           growthDuration:15}),
+           growthDurationInMonths:15}),
         
            new Crop({name:"Barley",
             purchasePrice:15,
              marketPrice:45,
              totalYield:205,
             attentionRange:4,
-            growthDuration:9}),
+            growthDurationInMonths:9}),
 ]
 
 let mockcropDbGetAllCrops:jest.SpyInstance<Crop[],[],any>;

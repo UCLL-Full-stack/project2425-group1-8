@@ -5,7 +5,7 @@ export class Crop{
     private readonly marketPrice:number;
     private readonly totalYield:number;
     private readonly attentionRange:number;
-    private readonly growthDuration:number;
+    private readonly growthDurationInMonths:number;
 
     constructor (crop:{
         id?:number;
@@ -14,7 +14,7 @@ export class Crop{
         marketPrice:number;
         totalYield:number;
         attentionRange:number;
-        growthDuration:number;
+        growthDurationInMonths:number;
     }){
         this.validate(crop);
         this.id=crop.id;
@@ -23,9 +23,9 @@ export class Crop{
         this.marketPrice=crop.marketPrice;
         this.totalYield=crop.totalYield;
         this.attentionRange=crop.attentionRange;
-        this.growthDuration=crop.growthDuration;
+        this.growthDurationInMonths=crop.growthDurationInMonths;
     }
-    validate(crop:{name:string;purchasePrice:number|undefined;marketPrice:number;totalYield:number;attentionRange:number;growthDuration:number;}){
+    validate(crop:{name:string;purchasePrice:number|undefined;marketPrice:number;totalYield:number;attentionRange:number;growthDurationInMonths:number;}){
         if(!crop.name){
             throw new Error('name must be provided');
         }
@@ -58,8 +58,8 @@ export class Crop{
     getAttentionRange():number{
         return this.attentionRange;
     }
-    getGrowthDuration():number{
-        return this.growthDuration;
+    getgrowthDurationInMonths():number{
+        return this.growthDurationInMonths;
     }
 
     equals(otherCrop:Crop):boolean{
@@ -67,7 +67,7 @@ export class Crop{
         this.purchasePrice===otherCrop.getPurchasePrice()&&
         this.marketPrice===otherCrop.getMarketPrice()&&
         this.attentionRange===otherCrop.getAttentionRange()&&
-        this.growthDuration===otherCrop.getGrowthDuration()&&
+        this.growthDurationInMonths===otherCrop.getgrowthDurationInMonths()&&
         this.totalYield===otherCrop.getTotalYield());
     }
 

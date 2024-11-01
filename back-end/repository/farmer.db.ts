@@ -4,7 +4,7 @@ const farmer=new Farmer(  {
     name:"Yusuf Doe",
     email:"yusufdoe@gmail.com",
     farmingPractice:"agroforestry",
-    farmSize:200})
+    farmSizeInHectares:200})
 
     const getFarmer=():Farmer=>{
         return farmer;

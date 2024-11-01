@@ -6,18 +6,27 @@ const crops=[
             marketPrice:40,
             totalYield:200,
            attentionRange:3,
-           growthDuration:15}),
+           growthDurationInMonths:15}),
         
            new Crop({name:"Barley",
             purchasePrice:15,
              marketPrice:45,
              totalYield:205,
             attentionRange:4,
-            growthDuration:9}),
+            growthDurationInMonths:9}),
 ]
 
 const getAllCrops=():Crop[]=>{
     return crops;
 }
 
-export default {getAllCrops};
+const findCropByName=(name:string):Crop|undefined=> {
+    return crops.find(crop=>crop.getName()===name)
+}
+
+const addCrop=(crop:Crop):Crop=>{
+    crops.push(crop);
+    return crop;
+}
+
+export default {getAllCrops,findCropByName,addCrop};

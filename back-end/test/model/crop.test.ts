@@ -8,7 +8,7 @@ test('given:valid values for crop,when:crop is added,then:crop is added with tho
     const    marketPrice=40;
     const    totalYield=200;
     const   attentionRange=3;
-    const   growthDuration=15;
+    const   growthDurationInMonths=15;
 
     //when
     const crop= new Crop({
@@ -17,7 +17,7 @@ test('given:valid values for crop,when:crop is added,then:crop is added with tho
         marketPrice,
         totalYield,
         attentionRange,
-        growthDuration       
+        growthDurationInMonths       
     });
 
     //then
@@ -26,7 +26,7 @@ test('given:valid values for crop,when:crop is added,then:crop is added with tho
     expect(crop.getAttentionRange()).toEqual(attentionRange);
     expect(crop.getMarketPrice()).toEqual(marketPrice);
     expect(crop.getTotalYield()).toEqual(totalYield);
-    expect(crop.getGrowthDuration()).toEqual(growthDuration);
+    expect(crop.getgrowthDurationInMonths()).toEqual(growthDurationInMonths);
 
 
 } )
@@ -37,10 +37,10 @@ test('given a null name ,when creating a crop,then an error is thrown',()=>{
     const    marketPrice=40;
     const    totalYield=200;
     const   attentionRange=3;
-    const   growthDuration=15;
+    const   growthDurationInMonths=15;
 
     //when
-    const crop=()=> new Crop({name,purchasePrice,marketPrice,totalYield,attentionRange,growthDuration});
+    const crop=()=> new Crop({name,purchasePrice,marketPrice,totalYield,attentionRange,growthDurationInMonths});
 
     //then
 
@@ -54,10 +54,10 @@ test('given an invalid attention range ,when creating a crop,then an error is th
     const    marketPrice=40;
     const    totalYield=200;
     const   attentionRange=13;
-    const   growthDuration=15;
+    const   growthDurationInMonths=15;
 
     //when
-    const crop=()=> new Crop({name,purchasePrice,marketPrice,totalYield,attentionRange,growthDuration});
+    const crop=()=> new Crop({name,purchasePrice,marketPrice,totalYield,attentionRange,growthDurationInMonths});
 
     //then
 

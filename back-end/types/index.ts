@@ -1,5 +1,7 @@
 // type Role='farmer'|'customer';
 
+import { Crop } from "../model/crop";
+
 // type UserInput={
 //     id?:number;
 //     username:string;
@@ -16,7 +18,7 @@ type CropInput={
         marketPrice:number;
         totalYield:number;
         attentionRange:number;
-        growthDuration:number;
+        growthDurationInMonths:number;
 };
 
 type FarmerInput={
@@ -25,7 +27,7 @@ type FarmerInput={
         age:number;
         email:string
         farmingPractice:string;
-        farmSize:number;
+        farmSizeInHectares:number;
         // user:UserInput;
 
 };
@@ -35,7 +37,7 @@ type CustomerInput={
         name:string;
         address:string;
         email:string;
-        cropPreference:string;   
+        cropPreference:CropInput[];   
         // user:UserInput;
 
 };
@@ -45,7 +47,7 @@ type SeedSupplierInput={
         name:string;
         address:string;
         email:string;
-        seedType:string;
+        seedType:CropInput[];
 };
 
 type ResourceInput={

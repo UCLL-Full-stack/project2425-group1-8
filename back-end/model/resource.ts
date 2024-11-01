@@ -35,7 +35,7 @@ export class Resource {
    }
 
    validate(resource:{name:string;serviceDuration:number;}){
-      if(resource.name ===null){
+      if(!resource.name ){
           throw new Error('Name cannot be null');
       }
       if(resource.serviceDuration < 0){

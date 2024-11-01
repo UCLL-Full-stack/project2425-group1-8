@@ -6,7 +6,7 @@ const farmer=new Farmer(  {
     name:"Yusuf Doe",
     email:"yusufdoe@gmail.com",
     farmingPractice:"agroforestry",
-    farmSize:200})
+    farmSizeInHectares:200})
 
 
 let mockfarmerDbGetFarmer:jest.SpyInstance<Farmer,[],any>;

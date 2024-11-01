@@ -7,14 +7,14 @@ test('given:valid values for farmer,when: getting the farmer,then:farmer is seen
     const   age=40;
     const    email="yusufdoe@gmail.com";
     const   farmingPractice="agroforestry";
-    const   farmSize=200;
+    const   farmSizeInHectares=200;
     //when
     const farmer= new Farmer({
         name,
         // age,
         email,
         farmingPractice,
-        farmSize       
+        farmSizeInHectares       
     });
 
     //then
@@ -22,7 +22,7 @@ test('given:valid values for farmer,when: getting the farmer,then:farmer is seen
     // expect(farmer.getAge()).toEqual(age); we removed age;
     expect(farmer.getEmail()).toEqual(email);
     expect(farmer.getFarmingPractice()).toEqual(farmingPractice);
-    expect(farmer.getfarmSize()).toEqual(farmSize);
+    expect(farmer.getfarmSizeInHectares()).toEqual(farmSizeInHectares);
 
 
 } )
@@ -33,14 +33,14 @@ test('given a null name ,when creating a farmer,then an error is thrown',()=>{
      const   age=40;
      const    email="yusufdoe@gmail.com";
      const   farmingPractice="agroforestry";
-     const   farmSize=200;
+     const   farmSizeInHectares=200;
      //when
      const farmer=()=> new Farmer({
          name,
          // age,
          email,
          farmingPractice,
-         farmSize       
+         farmSizeInHectares       
      });
     //then
 
@@ -53,14 +53,14 @@ test('given an invalid email ,when creating a farmer,then an error is thrown',()
     const   age=40;
     const    email="yusufdoegmail.com";
     const   farmingPractice="agroforestry";
-    const   farmSize=200;
+    const   farmSizeInHectares=200;
     //when
     const farmer=()=> new Farmer({
         name,
         // age,
         email,
         farmingPractice,
-        farmSize       
+        farmSizeInHectares       
     });
    //then
 
@@ -73,14 +73,14 @@ test('given a negative farm size ,when creating a farmer,then an error is thrown
     const   age=40;
     const    email="yusufdoe@gmail.com";
     const   farmingPractice="agroforestry";
-    const   farmSize=-200;
+    const   farmSizeInHectares=-200;
     //when
     const farmer=()=> new Farmer({
         name,
         // age,
         email,
         farmingPractice,
-        farmSize       
+        farmSizeInHectares       
     });
    //then
 

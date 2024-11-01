@@ -39,13 +39,13 @@ export class Customer{
     }
 
     validate(customer:{name:string;address:string;email:string;}){
-        if(customer.name ===null){
+        if(!customer.name){
             throw new Error('Name cannot be null');
         }
-        if(customer.address ===null){
+        if(!customer.address ){
             throw new Error('Address cannot be null');
         }
-        if(customer.email ===null){
+        if(!customer.email ){
             throw new Error('Email cannot be null');
         }
         if(!validator.isEmail(customer.email)){

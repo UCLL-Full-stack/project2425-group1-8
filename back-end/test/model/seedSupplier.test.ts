@@ -2,7 +2,7 @@ import { Crop } from "../../model/crop";
 import { SeedSupplier } from "../../model/seedSuplier";
 
 //given
-const crop1=new Crop({name:"maize",purchasePrice:10,marketPrice:40,totalYield:200,attentionRange:3,growthDuration:15})
+const crop1=new Crop({name:"maize",purchasePrice:10,marketPrice:40,totalYield:200,attentionRange:3,growthDurationInMonths:15})
 
 const name="Alfaraj";
 const address="Hassrode 14";

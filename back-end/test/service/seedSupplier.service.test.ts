@@ -12,7 +12,7 @@ const cropInput: CropInput={
     marketPrice:40,
     totalYield:200,
     attentionRange:3,
-    growthDuration:15
+    growthDurationInMonths:15
 }
 const crop=new Crop({
     ...cropInput

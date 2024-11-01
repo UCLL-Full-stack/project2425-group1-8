@@ -19,7 +19,7 @@
  *              farmingPractice:
  *                   type:string
  *                   description:farming practice of the farmer
- *              farmSize:
+ *              farmSizeInHectares:
  *                   type:number
  *                   description:farm size of the farmer
  */
