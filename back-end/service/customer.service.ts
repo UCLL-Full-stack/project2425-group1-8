@@ -38,14 +38,10 @@ const addCustomer = ({
     return customerDb.addCustomer(customer);
 }
 
-export default { getAllCustomers, addCustomer };
 const getCustomerByName=(name:string):Customer=>{
 const customer=customerDb.getCustomerByName({name});
 if(!customer) throw new Error(`customer with name ${name}does not exist.`);
 return customer;
 };
-export default {
-    getAllCustomers,
-    getCustomerByName
+export default { getAllCustomers, addCustomer ,getCustomerByName};
 
-};
