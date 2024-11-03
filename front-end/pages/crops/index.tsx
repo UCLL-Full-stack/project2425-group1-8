@@ -1,5 +1,6 @@
 import CropDetails from "@/components/crops/CropDetails";
 import CropsOverviewTable from "@/components/crops/CropsOverviewTable";
+import Header from "@/components/header";
 import CropService from "@/service/CropService";
 import { Crop } from "@/types";
 import Head from "next/head";
@@ -21,7 +22,9 @@ const Crops: React.FC = () => {
       <Head>
         <title>Crops</title>
       </Head>
-      <main className="d-flex flex-column justify-content-center align-items-center">
+      <Header />
+
+      <main className="d-flex flex-column justify-content-center align-items-left">
         <h1>CROPS</h1>
         <section>
           {crops && (
