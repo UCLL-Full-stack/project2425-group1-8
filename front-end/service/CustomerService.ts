@@ -6,9 +6,18 @@ const getAllCustomers=async()=>{
         }
     });
 };
+const getCustomerByName=(customerName:string)=>{
+    return fetch(process.env.NEXT_PUBLIC_API_URL + `/customers/${customerName}`,{
+        method:"GET",
+        headers:{
+            "content-Type":"application/json",
+        },
+    })
+}
 
 const CustomerService ={
-    getAllCustomers
+    getAllCustomers,
+    getCustomerByName,
 };
 
 export default CustomerService;

@@ -24,7 +24,7 @@ const Crops: React.FC = () => {
       </Head>
       <Header />
 
-      <main className="d-flex flex-column justify-content-center align-items-left">
+      <main className="d-flex flex-column justify-content-center align-items-center">
         <h1>CROPS</h1>
         <section>
           {crops && (
