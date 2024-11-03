@@ -1,7 +1,7 @@
 import Header from "@components/header";
 import CustomerTable from "@/components/customer/customersTable";
 import CustomerService from "@/service/CustomerService";
-import { Customer } from "@/types";
+import { Crop, Customer } from "@/types";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import CropsOverviewTable from "@/components/crops/CropsOverviewTable";
@@ -21,6 +21,9 @@ const Customers:React.FC=() =>{
         getCustomers();
     },[])
 
+    const [selectedCrop, setSelectedCrop] = useState<Crop | null>(null);
+
+
     return (
         <>
         <Head>
@@ -36,16 +39,16 @@ const Customers:React.FC=() =>{
                 )}
             </section>
 
-            {/* {selectedCustomer &&(
+            {selectedCustomer &&(
                 <section className="mt-5">
                     <h2>
                         Crop Preferences of {selectedCustomer.name};
                     </h2>
                     {selectedCustomer.cropPreference &&(
-                        <CropsOverviewTable crops={Crops} selectedCrop={setSelectedCrop}/>
+                        <CropsOverviewTable crops={selectedCustomer.cropPreference} selectedCrop={setSelectedCrop}/>
                     )}
                 </section>
-            )} */}
+            )}
 
         </main>
         </>
