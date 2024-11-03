@@ -1,3 +1,4 @@
+import CropDetails from "@/components/crops/CropDetails";
 import CropsOverviewTable from "@/components/crops/CropsOverviewTable";
 import CropService from "@/service/CropService";
 import { Crop } from "@/types";
@@ -9,8 +10,8 @@ const Crops: React.FC = () => {
   const [selectedCrop, setSelectedCrop] = useState<Crop | null>(null);
   const getCrops = async () => {
     const response = await CropService.getAllCrops();
-    const crops = await response.json();
-    setCrops(crops);
+    const cropsData = await response.json();
+    setCrops(cropsData);
   };
   useEffect(() => {
     getCrops();
@@ -21,14 +22,22 @@ const Crops: React.FC = () => {
         <title>Crops</title>
       </Head>
       <main className="d-flex flex-column justify-content-center align-items-center">
-        <h1>Crops</h1>
+        <h1>CROPS</h1>
         <section>
           {crops && (
             <CropsOverviewTable crops={crops} selectedCrop={setSelectedCrop} />
           )}
           <h2>Crops Overview</h2>
         </section>
-        {selectedCrop && <section className="mt-5"></section>}
+        {selectedCrop && (
+          <section className="mt-5">
+            <h2>Crop Details</h2>
+            <CropDetails crop={selectedCrop} />
+            {/* {selectedCrop.purchasePrice&&(
+                <CropsOverviewTable crops= {selectedCrop}/>
+            ) } */}
+          </section>
+        )}
       </main>
     </>
   );

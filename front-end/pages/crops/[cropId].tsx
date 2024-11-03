@@ -12,9 +12,8 @@ const ReadCropById = () => {
   const { cropId } = router.query;
 
   const getCropById = async () => {
-    const [cropResponse] = await Promise.all([
-      CropService.getCropById(cropId as string),
-    ]);
+    const cropResponse = await CropService.getCropById(cropId as string);
+
     const [cropp] = await Promise.all([cropResponse.json()]);
     setCrop(cropp);
   };
@@ -22,14 +21,14 @@ const ReadCropById = () => {
     if (cropId) {
       getCropById();
     }
-  });
+  }, [cropId]);
 
   return (
     <>
       <Head>
         <title>Crop info</title>
       </Head>
-      <main>
+      <main className="d-flex flex-column justify-content align-items-center">
         <h1>Info of {crop && crop.name} </h1>
         {!crop && <p>Loading</p>}
         {crop && (

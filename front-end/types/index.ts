@@ -1,5 +1,5 @@
 export type Crop={
-    id?:number;
+    id:number;
         name:string;
         purchasePrice:number;
         marketPrice:number;

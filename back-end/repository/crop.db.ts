@@ -28,9 +28,13 @@ const findCropByName=(name:string):Crop|undefined=> {
     return crops.find(crop=>crop.getName()===name)
 }
 
+const getCropById=({id}:{id:number}):Crop|null=>{
+    return crops.find((crop)=>crop.getId()===id)||null;
+}
+
 const addCrop=(crop:Crop):Crop=>{
     crops.push(crop);
     return crop;
 }
 
-export default {getAllCrops,findCropByName,addCrop};
+export default {getAllCrops,findCropByName,getCropById,addCrop};

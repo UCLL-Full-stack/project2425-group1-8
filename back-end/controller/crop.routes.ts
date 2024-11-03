@@ -56,4 +56,33 @@ cropRouter.get('/',async(req: Request, res: Response, next: NextFunction) => {
     }
 });
 
+/**
+ * @swagger
+ * /crops/{id}:
+ *  get:
+ *      summary: Get a crop by id.
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            schema:
+ *              type: integer
+ *              required: true
+ *              description: The crop id.
+ *      responses:
+ *          200:
+ *              description: A crop object.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/Crop'
+ */
+cropRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const crop = await cropService.getCropById(Number(req.params.id));
+        res.status(200).json(crop);
+    } catch (error) {
+        next(error);
+    }
+});
+
 export { cropRouter };

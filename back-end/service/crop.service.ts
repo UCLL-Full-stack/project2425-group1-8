@@ -6,6 +6,12 @@ const getAllCrops=async():Promise<Crop[]> =>{
     return cropDb.getAllCrops();
 }
 
+const getCropById=(id:number):Crop=>{
+    const crop=cropDb.getCropById({id});
+    if(!crop)throw new Error(`Crop with id ${id} does not exist.`)
+        return crop;
+}
+
 const addCrop=({
     name,
     purchasePrice,
@@ -23,4 +29,4 @@ const addCrop=({
     return cropDb.addCrop(crop);
 }
 
-export default {getAllCrops,addCrop};
+export default {getAllCrops,getCropById,addCrop};
