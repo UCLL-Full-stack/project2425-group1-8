@@ -1,4 +1,5 @@
 import { Crop } from "../model/crop";
+import database from "./database";
 
 const crops=[
     new Crop({
@@ -20,8 +21,14 @@ const crops=[
             growthDurationInMonths:9}),
 ]
 
-const getAllCrops=():Crop[]=>{
-    return crops;
+const getAllCrops=async():Promise<Crop[]>=>{
+    try{
+        const cropPrisma= await database.crop.findMany({})
+        return cropPrisma.map((cropPrisma)=>Crop.from(cropPrisma));
+    }catch(error){
+        console.error(error);
+        throw new Error('Database error')
+    }
 }
 
 const findCropByName=(name:string):Crop|undefined=> {

@@ -1,4 +1,8 @@
+import { 
+    Crop as CropPrisma,
+ } from '@prisma/client';
 export class Crop{
+   
     private readonly id?:number;
     private readonly name:string;
     private readonly purchasePrice:number|undefined;
@@ -69,6 +73,18 @@ export class Crop{
         this.attentionRange===otherCrop.getAttentionRange()&&
         this.growthDurationInMonths===otherCrop.getgrowthDurationInMonths()&&
         this.totalYield===otherCrop.getTotalYield());
+    }
+
+    static from ({id,name,purchasePrice,marketPrice,totalYield,attentionRange,growthDurationInMonths}:CropPrisma){
+        return new Crop({
+            id,
+            name,
+            purchasePrice,
+            marketPrice,
+            totalYield,
+            attentionRange,
+            growthDurationInMonths
+        })
     }
 
 

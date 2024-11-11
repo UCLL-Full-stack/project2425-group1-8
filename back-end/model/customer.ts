@@ -1,7 +1,11 @@
 import { Crop } from "./crop";
 import validator from 'validator';
-
+import { 
+    Crop as CropPrisma,
+    Customer as CustomerPrisma
+ } from '@prisma/client';
 export class Customer{
+    private readonly id?:number;
     private readonly name:string;
     private readonly address:string;
     private readonly email:string;
@@ -9,17 +13,21 @@ export class Customer{
 
 
     constructor(customer:{
+        id?:number;
         name:string;
         address:string;
         email:string;
         cropPreference:Array<Crop>;
     }){
         this.validate(customer);
-
+        this.id=customer.id;
         this.name=customer.name;
         this.address=customer.address;
         this.email=customer.email;
         this.cropPreference=customer.cropPreference;
+    }
+    getId():number|undefined{
+        return this.id;
     }
 
     getName():string{
@@ -51,5 +59,23 @@ export class Customer{
         if(!validator.isEmail(customer.email)){
             throw new Error('Email format is invalid');
         }
+    }
+
+    static from({
+        id,
+        name,
+        address,
+        email,
+        cropPreference
+    }:CustomerPrisma & {cropPreference:CropPrisma[]}){
+        return new Customer({
+            id,
+            name,
+            address,
+            email,
+            cropPreference:cropPreference.map((cp)=>Crop.from(cp))
+            
+        })
+
     }
 }

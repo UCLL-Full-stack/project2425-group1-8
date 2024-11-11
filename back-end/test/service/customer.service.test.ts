@@ -36,7 +36,8 @@ const customers:Customer[]= [
     })
 ];
 
-let mockCustomerDbGetAllCustomers:jest.SpyInstance<Customer[],[],any >;
+let mockCustomerDbGetAllCustomers:jest.SpyInstance<Promise<Customer[]>, [], any>;
+
 
 beforeEach(()=>{
     mockCustomerDbGetAllCustomers=jest.spyOn(customerDb,'getAllCustomers');
@@ -48,7 +49,7 @@ afterEach(()=>{
 
 test('given valid customer fields, when getting customers,then all customers are returned',async()=>{
     //given
-    mockCustomerDbGetAllCustomers.mockReturnValue(customers);
+    mockCustomerDbGetAllCustomers.mockResolvedValue(customers);
     //when
     const returnedCustomers=await customerService.getAllCustomers();
     //then
