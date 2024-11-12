@@ -8,7 +8,7 @@ const crop1=new Crop({name:"maize",purchasePrice:10,marketPrice:40,totalYield:20
 
 const getAllseedSuppliers=async():Promise <SeedSupplier[]>=>{
     try {
-        const seedSuppliersPrisma=await database.seedSuplier.findMany({
+        const seedSuppliersPrisma=await database.seedSupplier.findMany({
             include:{seedType:true},
         });
         return seedSuppliersPrisma.map((seedSuplierPrisma) => SeedSupplier.from(seedSuplierPrisma));

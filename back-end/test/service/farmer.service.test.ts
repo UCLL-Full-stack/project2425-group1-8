@@ -2,32 +2,30 @@ import { Farmer } from "../../model/farmer";
 import farmerDb from "../../repository/farmer.db";
 import farmerService from "../../service/farmer.service";
 
-const farmer=new Farmer(  { 
-    name:"Yusuf Doe",
-    email:"yusufdoe@gmail.com",
-    farmingPractice:"agroforestry",
-    farmSizeInHectares:200})
-
-
-let mockfarmerDbGetFarmer:jest.SpyInstance<Farmer,[],any>;
-
-beforeEach(()=>{
-    mockfarmerDbGetFarmer=jest.spyOn(farmerDb,'getFarmer');
+const farmer = new Farmer({
+    name: "Yusuf Doe",
+    email: "yusufdoe@gmail.com",
+    farmingPractice: "agroforestry",
+    farmSizeInHectares: 200,
 });
 
+let mockfarmerDbGetFarmer: jest.SpyInstance<Promise<Farmer>, [string], any>;
 
-afterEach(()=>{
+beforeEach(() => {
+    mockfarmerDbGetFarmer = jest.spyOn(farmerDb, "getFarmer");
+});
+
+afterEach(() => {
     jest.clearAllMocks();
 });
 
-test('given:a farmer, when:asking for a logged in farmer then a farmer is returned',async ()=>{
-    //given
-    mockfarmerDbGetFarmer.mockReturnValue(farmer);
+test("given a farmer, when asking for a logged-in farmer by email, then a farmer is returned", async () => {
+    mockfarmerDbGetFarmer.mockResolvedValue(farmer);
+    const email = "yusufdoe@gmail.com";
 
-    //when
-    const loggedinFarmer=await farmerService.getFarmer();
+    const loggedinFarmer = await farmerService.getFarmer(email);
 
-    //then 
     expect(mockfarmerDbGetFarmer).toHaveBeenCalledTimes(1);
+    expect(mockfarmerDbGetFarmer).toHaveBeenCalledWith(email);
     expect(loggedinFarmer).toEqual(farmer);
-})
+});

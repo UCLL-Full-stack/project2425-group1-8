@@ -33,7 +33,7 @@ const seedSupliers:SeedSupplier[]= [
     })
 ];
 
-let mockSeedSupplierDbGetAllSeedSuppliers:jest.SpyInstance<SeedSupplier[],[],any >;
+let mockSeedSupplierDbGetAllSeedSuppliers:jest.SpyInstance<Promise<SeedSupplier[]>,[],any >;
 
 beforeEach(()=>{
     mockSeedSupplierDbGetAllSeedSuppliers=jest.spyOn(seedSupplierDb,'getAllseedSuppliers');
@@ -45,7 +45,7 @@ afterEach(()=>{
 
 test('given valid SeedSupplier fields, when getting SeedSuppliers,then all SeedSuppliers are returned',async()=>{
     //given
-    mockSeedSupplierDbGetAllSeedSuppliers.mockReturnValue(seedSupliers);
+    mockSeedSupplierDbGetAllSeedSuppliers.mockResolvedValue(seedSupliers);
     //when
     const returnedSeedSuppliers=await seedSupplierService.getAllseedSuppliers();
     //then
