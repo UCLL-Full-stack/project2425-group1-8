@@ -6,6 +6,9 @@ const prisma = new PrismaClient();
 const main = async()=> {
     await prisma.customer.deleteMany();
     await prisma.crop.deleteMany();
+    await prisma.farmer.deleteMany();
+    await prisma.resource.deleteMany();
+    await prisma.seedSupplier.deleteMany();
 
     const Millet = await prisma.crop.create({
         data: {
@@ -78,8 +81,53 @@ const main = async()=> {
             }
         }
     });
-};
 
+    const farmer1=await prisma.farmer.create( { 
+        data:{
+            name:"Yusuf Doe",
+            email:"yusufdoe@gmail.com",
+            farmingPractice:"agroforestry",
+            farmSizeInHectares:200}
+            
+});
+
+
+const resource1=await prisma.resource.create({
+     data:{
+        name:"BKL tractor",
+        manufacturer:"manufact",
+        service_duration:12,
+        service_start_date:new Date(12/2/2024)}
+    });
+const resource2=await prisma.resource.create({
+    data:{
+    name:"Bow rake",
+        manufacturer:"AgriExpo",
+        service_duration:2,
+        service_start_date:new Date(12/10/2024)}
+});
+
+const seedSupplier1=await prisma.seedSupplier.create({
+    data:{
+        name:"Fletcher",
+        address:"Genk",
+        email:"fletcher123@gmail.com",
+        seedType:{
+            connect: {id: Sorghum.id}
+        }}
+});
+const seedSupplier2=await prisma.seedSupplier.create({
+    data:{
+        name:"Fletcheris",
+        address:"Luik",
+        email:"fletcheris123@gmail.com",
+        seedType:{
+            connect: {id: Millet.id}
+        }}
+    });
+
+            
+};
 (async()=> {
         try {
             await main();

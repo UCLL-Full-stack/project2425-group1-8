@@ -26,6 +26,28 @@ model Crop {
         attentionRange          Int
         growthDurationInMonths  Int
         Customers               Customer[]
+        seedSuppliers           SeedSupplier[]
 
 }
- 
+model Farmer {
+        id                      Int     @id @default(autoincrement())
+        name                    String  
+        email                   String  @unique
+        farmingPractice         String
+        farmSizeInHectares      Int
+}
+model SeedSupplier{
+    id                          Int     @id @default(autoincrement())
+    name                        String  @unique
+    address                     String
+    email                       String
+    cropId                      Int
+    seedType                    Crop    @relation(fields: [cropId], references: [id])
+}
+
+model Resource {
+    name                        String  @unique
+    manufacturer                String
+    service_duration            Int
+    service_start_date          DateTime
+}

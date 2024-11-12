@@ -1,6 +1,8 @@
 import validator from 'validator';
-
+import {Farmer as FarmerPrisma
+}from '@prisma/client';
 export class Farmer{
+    private id?: number;
     private readonly name:string;
     // private readonly age:number;
     private readonly email:string;
@@ -8,12 +10,14 @@ export class Farmer{
     private readonly farmSizeInHectares:number;
 
     constructor (farmer:{
+        id?: number;
         name:string;
         // age:number;
         email:string
         farmingPractice:string;
         farmSizeInHectares:number;
     }){
+        this.id=farmer.id;
         this.name=farmer.name;
         // this.age=farmer.age;
         this.email=farmer.email;
@@ -31,7 +35,7 @@ export class Farmer{
         if(!validator.isEmail(farmer.email)){
             throw new Error('invalid email provided!')
         }
-        if(farmer.farmSizeInHectares<0){
+        if(farmer.farmSizeInHectares < 0){
             throw new Error('farm size can not be negative!!')
         }
     }
@@ -52,7 +56,21 @@ export class Farmer{
         return this.farmSizeInHectares;
     }
     
-    
+    static from({
+        id,                      
+        name,                      
+        email,                     
+        farmingPractice,         
+        farmSizeInHectares      
+    }:FarmerPrisma){
+        return new Farmer({
+            id,                      
+            name,                      
+            email,                     
+            farmingPractice,         
+            farmSizeInHectares
+        })
+    }
     
 
 

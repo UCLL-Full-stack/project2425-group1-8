@@ -1,3 +1,7 @@
+import{
+   Resource as ResourcePrisma,
+} from '@prisma/client';
+
 export class Resource {
    private readonly name : string;
    private readonly manufacturer:string;
@@ -41,5 +45,19 @@ export class Resource {
       if(resource.serviceDuration < 0){
          throw new Error('serviceDuration cannot be negative');
       }
+  }
+
+static from({
+   name,
+    manufacturer,
+    service_duration,
+    service_start_date
+  }: ResourcePrisma){
+   return new Resource({
+    name,
+    manufacturer,
+    service_duration,
+    service_start_date
+   });
   }
 }
