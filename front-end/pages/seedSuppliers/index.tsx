@@ -1,48 +1,29 @@
 import SeedSuppliersOverView from "@/components/SeedSuppliers/SeedSuppliersOverView";
-import CropService from "@/service/CropService";
 import SeedSupplierService from "@/service/SeedSupplier";
 import { SeedSupplier } from "@/types";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
-import useSWR, { mutate } from "swr";
-import useInterval from "use-interval";
 
 const SeedSuppliers = () => {
-//   const [seedSuppliers, setSeedSuppliers] = useState<Array<SeedSupplier>>();
-//   const [selectedSeedSupplier, setSelectedSeedSupplier] =
-//     useState<SeedSupplier | null>(null);
+  const [seedSuppliers, setSeedSuppliers] = useState<SeedSupplier[]>([]);
+  const [selectedSeedSupplier, setSelectedSeedSupplier] =
+    useState<SeedSupplier | null>(null);
 
-    const getSeedSuppliersAndCrops=async()=>{
-        const response=await Promise.all([
-            SeedSupplierService.getAllSeedSuppliers(),
-            CropService.getAllCrops()
-        ]);
-        const [seedSupplierresponse,cropResponse]=response;
+  const getSeedSuppliers = async () => {
+    try {
+      const response = await SeedSupplierService.getAllSeedSuppliers();
+      if (!response.ok) throw new Error("Failed to fetch seed suppliers");
+      const suppliers = await response.json();
+      setSeedSuppliers(suppliers);
+    } catch (error) {
+      console.error(error);
+      setSeedSuppliers([]);
+    }
+  };
 
-        if (seedSupplierresponse.ok && cropResponse.ok){
-            const seedSuppliers=await seedSupplierresponse.json();
-            const crops=await cropResponse.json();
-            return {seedSuppliers,crops};
-        }
-    };
-
-const {data, isLoading,error}=useSWR(
-    "seedSuppliersAndCrops",
-    getSeedSuppliersAndCrops
-)
-
-useInterval(()=>{
-    mutate("seedSuppliersAndCrops",getSeedSuppliersAndCrops())
-},1000)
-//   const getSeedSuppliers = async () => {
-//     const response = await SeedSupplierService.getAllSeedSuppliers();
-//     const seedSuppliers = await response.json();
-//     setSeedSuppliers(seedSuppliers);
-//   };
-
-//   useEffect(() => {
-//     getSeedSuppliers();
-//   }, []);
+  useEffect(() => {
+    getSeedSuppliers();
+  }, []);
 
   return (
     <>
@@ -51,16 +32,14 @@ useInterval(()=>{
       </Head>
       <main className="d-flex flex-column justify-content-center align-items-center">
         <h2>Seed Suppliers Overview</h2>
-        {error && <div className="text-danger">{error}</div> }
-        {isLoading && <p className="text-secondary">Loading...</p> }
-        {data && (
-            <SeedSuppliersOverView
-              seedSuppliers={data.seedSuppliers}
-              crops={data.crops}
-            />
-
+        {seedSuppliers.length > 0 ? (
+          <SeedSuppliersOverView
+            seedSuppliers={seedSuppliers}
+            selectSeedSupplier={setSelectedSeedSupplier}
+          />
+        ) : (
+          <p>Loading or no suppliers available...</p>
         )}
-    
       </main>
     </>
   );
