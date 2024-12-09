@@ -4,12 +4,14 @@ import {
     Crop as CropPrisma,
     Customer as CustomerPrisma
  } from '@prisma/client';
+import { Role } from "../types";
 export class Customer{
     private readonly id?:number;
     private readonly name:string;
     private readonly address:string;
     private readonly email:string;
     private readonly cropPreference:Array<Crop>;
+    private  readonly role?: Role;
 
 
     constructor(customer:{
@@ -18,6 +20,8 @@ export class Customer{
         address:string;
         email:string;
         cropPreference:Array<Crop>;
+        role: Role;
+
     }){
         this.validate(customer);
         this.id=customer.id;
@@ -25,6 +29,8 @@ export class Customer{
         this.address=customer.address;
         this.email=customer.email;
         this.cropPreference=customer.cropPreference;
+        this.role = customer.role;
+
     }
     getId():number|undefined{
         return this.id;
@@ -46,7 +52,7 @@ export class Customer{
         return this.cropPreference;
     }
 
-    validate(customer:{name:string;address:string;email:string;}){
+    validate(customer:{name:string;address:string;email:string;role:Role}){
         if(!customer.name){
             throw new Error('Name cannot be null');
         }
@@ -66,16 +72,19 @@ export class Customer{
         name,
         address,
         email,
-        cropPreference
-    }:CustomerPrisma & {cropPreference:CropPrisma[]}){
+        cropPreference,
+        roleId,
+        role 
+    }:CustomerPrisma & {cropPreference:CropPrisma[]; role?:Role}){
         return new Customer({
             id,
             name,
             address,
             email,
-            cropPreference:cropPreference.map((cp)=>Crop.from(cp))
+            cropPreference:cropPreference.map((cp)=>Crop.from(cp)),
+            role:role as Role
             
         })
 
-    }
+   }
 }

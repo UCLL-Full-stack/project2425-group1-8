@@ -1,4 +1,4 @@
-const getAllCustomers=async()=>{
+const getAllCustomers=()=>{
     return fetch(process.env.NEXT_PUBLIC_API_URL +"/customers",{
         method:"GET",
         headers:{

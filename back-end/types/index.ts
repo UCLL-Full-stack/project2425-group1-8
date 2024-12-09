@@ -1,7 +1,4 @@
-// type Role='farmer'|'customer';
-
-import { Crop } from "../model/crop";
-
+type Role='farmer'|'customer'|'seedSupplier';
 // type UserInput={
 //     id?:number;
 //     username:string;
@@ -28,6 +25,7 @@ type FarmerInput={
         email:string
         farmingPractice:string;
         farmSizeInHectares:number;
+        role:Role;
         // user:UserInput;
 
 };
@@ -37,7 +35,8 @@ type CustomerInput={
         name:string;
         address:string;
         email:string;
-        cropPreference:CropInput[];   
+        cropPreference:CropInput[]; 
+        role:Role;  
         // user:UserInput;
 
 };
@@ -48,6 +47,7 @@ type SeedSupplierInput={
         address:string;
         email:string;
         seedType:CropInput[];
+        role:Role;
 };
 
 type ResourceInput={
@@ -58,21 +58,20 @@ type ResourceInput={
         serviceStartDate:Date;
 };
 
-// type AuthenticationResponse={
-//     token:string;
-//     username:string;
-//     name:string;
-//     role:string;
-// };
+type AuthenticationResponse={
+    token:string;
+    name:string;
+    role:string;
+};
 
 export{
-    // Role,
+    Role,
     CropInput,
     FarmerInput,
     SeedSupplierInput,
     ResourceInput,
     CustomerInput,
-    // AuthenticationResponse
+    AuthenticationResponse
 
 };
 

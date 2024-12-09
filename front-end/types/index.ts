@@ -1,3 +1,5 @@
+type Role='farmer'|'customer'|'seedSupplier';
+
 export type Crop={
     id:number;
         name:string;
@@ -13,5 +15,21 @@ export type Customer={
         name:string;
         address:string;
         email:string;
-        cropPreference:Crop[];   
+        cropPreference:Crop[]; 
+        role:Role;  
 }
+
+export type SeedSupplier={
+    id?:number;
+    name:string;
+    address:string;
+    email:string;
+    seedType:Crop[];
+    role:Role;
+};
+
+
+export type StatusMessage = {
+    message: string;
+    type: "error" | "success";
+};

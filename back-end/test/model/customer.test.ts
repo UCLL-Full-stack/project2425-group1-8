@@ -11,11 +11,13 @@ const email="alex123@gmail.com"
 const cropPreference=[crop1]
 test("given: Valid Fields When: Creating Customer then: A Customer Is Created With Those Fields",()=>{
 //when
+const role='customer'
 const customer=new Customer({
     name,
     address,
     email,
-    cropPreference
+    cropPreference,
+    role
 });
 //then
 expect(customer.getName()).toEqual(name);

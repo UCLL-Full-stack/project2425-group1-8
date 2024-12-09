@@ -32,8 +32,9 @@ const addCustomer = ({
 
         givenCrops.push(existingCrop);
     }
+    const role='customer'
 
-    const customer = new Customer({ name, address, email, cropPreference: givenCrops });
+    const customer = new Customer({ name, address, email, cropPreference: givenCrops,role });
 
     return customerDb.addCustomer(customer);
 }

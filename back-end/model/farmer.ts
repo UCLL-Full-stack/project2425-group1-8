@@ -1,6 +1,7 @@
 import validator from 'validator';
 import {Farmer as FarmerPrisma
 }from '@prisma/client';
+import { Role } from '../types';
 export class Farmer{
     private id?: number;
     private readonly name:string;
@@ -8,6 +9,7 @@ export class Farmer{
     private readonly email:string;
     private readonly farmingPractice:string;
     private readonly farmSizeInHectares:number;
+    private  readonly role?: Role;
 
     constructor (farmer:{
         id?: number;
@@ -16,6 +18,8 @@ export class Farmer{
         email:string
         farmingPractice:string;
         farmSizeInHectares:number;
+        role: Role;
+
     }){
         this.id=farmer.id;
         this.name=farmer.name;
@@ -23,11 +27,13 @@ export class Farmer{
         this.email=farmer.email;
         this.farmingPractice=farmer.farmingPractice;
         this.farmSizeInHectares=farmer.farmSizeInHectares;
+        this.role = farmer.role;
+
         this.validate(farmer);
       
     }
 
-    validate(farmer:{name:string;email:string;farmingPractice:string;farmSizeInHectares:number;
+    validate(farmer:{name:string;email:string;farmingPractice:string;farmSizeInHectares:number;role:Role
     }){
         if(!farmer.name){
             throw new Error('name must be provided');
@@ -55,20 +61,27 @@ export class Farmer{
     getfarmSizeInHectares():number{
         return this.farmSizeInHectares;
     }
+    getRole():Role|undefined{
+        return this.role
+    }
     
     static from({
         id,                      
         name,                      
         email,                     
         farmingPractice,         
-        farmSizeInHectares      
-    }:FarmerPrisma){
+        farmSizeInHectares,
+        roleId,
+        role      
+    }:FarmerPrisma& {role?:Role}){
         return new Farmer({
             id,                      
             name,                      
             email,                     
             farmingPractice,         
-            farmSizeInHectares
+            farmSizeInHectares,
+            role:role as Role
+
         })
     }
     

@@ -18,21 +18,23 @@ const crop2=new  Crop({
          totalYield:205,
         attentionRange:4,
         growthDurationInMonths:9});
-
+const role='customer'
 const customers=[
     new Customer({
         id:1,
         name:"Alex",
         address:"Hassrode",
         email:"alex123@gmail.com",
-        cropPreference:[crop1]
+        cropPreference:[crop1],
+        role
     }),
     new Customer({
         id:2,
         name:"Alexis",
         address:"Ghent",
         email:"alexis123@gmail.com",
-        cropPreference:[crop1,crop2]
+        cropPreference:[crop1,crop2],
+        role
     })
 ];
 

@@ -1,3 +1,4 @@
+import { Role } from "../types";
 import { Crop } from "./crop";
 import {
     SeedSupplier as SeedSupplierPrisma,
@@ -9,6 +10,7 @@ export class SeedSupplier{
     private readonly address:string;
     private readonly email:string;
     private readonly seedType:Crop;
+    private  readonly role?: Role;
 
     constructor(seedSupplier:{
         id?: number;
@@ -16,6 +18,8 @@ export class SeedSupplier{
         address:string;
         email:string;
         seedType:Crop;
+        role: Role;
+
     }){
         this.validate(seedSupplier);
         this.id=seedSupplier.id;
@@ -23,6 +27,8 @@ export class SeedSupplier{
         this.address=seedSupplier.address;
         this.email=seedSupplier.email;
         this.seedType=seedSupplier.seedType;
+        this.role = seedSupplier.role;
+
     }
 
     getName():string{
@@ -40,7 +46,7 @@ export class SeedSupplier{
     getSeedType():Crop{
         return this.seedType;
     }
-    validate(seedSupplier:{name:string;address:string;email:string;seedType:Crop}){
+    validate(seedSupplier:{name:string;address:string;email:string;seedType:Crop,role:Role}){
         if(!seedSupplier.name ){
             throw new Error('Name cannot be null');
         }
@@ -60,14 +66,18 @@ export class SeedSupplier{
         name,
         address,
         email,
-        seedType
-    }:SeedSupplierPrisma & {seedType:CropPrisma}){
+        seedType,
+        roleId,
+        role
+    }:SeedSupplierPrisma & {seedType:CropPrisma; role?:Role}){
         return new SeedSupplier({
             id,
             name,
             address,
             email,
-            seedType:Crop.from(seedType)
+            seedType:Crop.from(seedType),
+            role:role as Role
+
         });
     }
 }

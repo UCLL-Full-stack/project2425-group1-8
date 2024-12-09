@@ -9,12 +9,14 @@ test('given:valid values for farmer,when: getting the farmer,then:farmer is seen
     const   farmingPractice="agroforestry";
     const   farmSizeInHectares=200;
     //when
+    const role='farmer'
     const farmer= new Farmer({
         name,
         // age,
         email,
         farmingPractice,
-        farmSizeInHectares       
+        farmSizeInHectares    ,
+        role   
     });
 
     //then
@@ -35,12 +37,15 @@ test('given a null name ,when creating a farmer,then an error is thrown',()=>{
      const   farmingPractice="agroforestry";
      const   farmSizeInHectares=200;
      //when
+     const role='farmer'
+
      const farmer=()=> new Farmer({
          name,
          // age,
          email,
          farmingPractice,
-         farmSizeInHectares       
+         farmSizeInHectares,
+         role       
      });
     //then
 
@@ -55,12 +60,15 @@ test('given an invalid email ,when creating a farmer,then an error is thrown',()
     const   farmingPractice="agroforestry";
     const   farmSizeInHectares=200;
     //when
+    const role='farmer'
+
     const farmer=()=> new Farmer({
         name,
         // age,
         email,
         farmingPractice,
-        farmSizeInHectares       
+        farmSizeInHectares ,
+        role      
     });
    //then
 
@@ -75,12 +83,15 @@ test('given a negative farm size ,when creating a farmer,then an error is thrown
     const   farmingPractice="agroforestry";
     const   farmSizeInHectares=-200;
     //when
+    const role='farmer'
+
     const farmer=()=> new Farmer({
         name,
         // age,
         email,
         farmingPractice,
-        farmSizeInHectares       
+        farmSizeInHectares ,
+        role      
     });
    //then
 
