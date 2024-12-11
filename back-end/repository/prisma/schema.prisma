@@ -7,24 +7,15 @@ datasource db {
     url = env("DATABASE_URL")
 }
 
-model Role {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
-  farmers Farmer[]
-  customers Customer[]
-  seedSuppliers SeedSupplier[]
-
-}
-
 model Customer {
     id              Int     @id @default(autoincrement())
-    name            String 
-    password        String 
-    address         String
-    email           String          @unique
-    cropPreference  Crop[]?
-    role            Role?    @relation(fields: [roleId], references: [id])
-    roleId          Int?
+    cropPreference  Crop[]
+      role      String
+      name      String    @unique
+      email     String    @unique
+      password  String
+      address   String
+   
 
 
 }
@@ -44,26 +35,24 @@ model Crop {
 }
 model Farmer {
         id                      Int     @id @default(autoincrement())
-        name                    String 
-        password                String
- 
-        email                   String  @unique
         farmingPractice         String
         farmSizeInHectares      Int
-        role                    Role    @relation(fields: [roleId], references: [id])
-        roleId                  Int
-
+         role      String
+          name      String    @unique
+          email     String    @unique
+          password  String
+      
 }
 model SeedSupplier{
     id                          Int     @id @default(autoincrement())
-    name                        String  @unique
-    password                    String
-    address                     String
-    email                       String
     cropId                      Int
     seedType                    Crop    @relation(fields: [cropId], references: [id])
-    role                        Role    @relation(fields: [roleId], references: [id])
-    roleId                      Int
+     role                       String
+      name                       String    @unique
+  email                          String    @unique
+  password                       String
+  address                        String
+     
 
 
 }

@@ -1,28 +1,28 @@
 import { Customer } from "../model/customer";
 import customerDb from "../repository/customer.db";
 import { CustomerInput } from "../types";
-import { Role } from "../types";
-import { Crop } from "../model/crop";
-import cropService from "./crop.service";
-import cropDb from "../repository/crop.db";
+import bcrypt from 'bcrypt';
 
 const getAllCustomers = async (): Promise<Customer[]> => {
     return customerDb.getAllCustomers();
 }
 
-const addCustomer = ({
+const addCustomer =async ({
     name,
     password,
     address,
     email, 
+    role
 }: CustomerInput): Promise<Customer> => {
-    const existingCustomer = customerDb.findCustomerByEmail(email);
+    const existingCustomer = customerDb.findCustomerByEmail({email});
 
-    if (existingCustomer) {
+    if (await existingCustomer) {
         throw new Error('This customer already exists in the database.');
-    }else{
-        const createdCustomer=customerDb.addCustomer({ name,password, address, email});
-return createdCustomer    }
+    }
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const createdCustomer=new Customer({ name,password:hashedPassword, address, email,role});
+    return createdCustomer  
+  }
 
     // const givenCrops: Crop[] = [];
 
@@ -42,10 +42,10 @@ return createdCustomer    }
 
    
  
-}
-const getCustomerByName=(name:string):Customer=>{
-const customer=customerDb.getCustomerByName({name});
-if(!customer) throw new Error(`customer with name ${name}does not exist.`);
-return customer;
+
+const getCustomerByName=async({name}:{name:string}):Promise<Customer>=>{
+        const customer=await customerDb.getCustomerByName({name});
+        if(!customer) throw new Error(`customer with name ${name}does not exist.`);
+        return customer;
 };
 export default { getAllCustomers, addCustomer ,getCustomerByName};

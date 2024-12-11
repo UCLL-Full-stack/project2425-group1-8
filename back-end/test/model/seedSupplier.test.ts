@@ -10,11 +10,13 @@ const email="alfaraj123@gmail.com";
 const seedType=crop1;
 test("given: Valid fields when: Creating seedSupplier then: A seedSuplier is created with those fields ",()=>{
     //when
+    const role='seedSupplier'
     const seedSuplier=new SeedSupplier({
         name,
         address,
         email,
-        seedType
+        seedType,
+        role
     });
     //then
     expect(seedSuplier.getName()).toEqual(name);

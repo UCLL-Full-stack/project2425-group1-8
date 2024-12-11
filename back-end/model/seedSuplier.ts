@@ -1,4 +1,3 @@
-import { Role } from "../types";
 import { Crop } from "./crop";
 import {
     SeedSupplier as SeedSupplierPrisma,
@@ -10,7 +9,7 @@ export class SeedSupplier{
     private readonly address:string;
     private readonly email:string;
     private readonly seedType:Crop;
-    private  readonly role?: Role;
+    private  readonly role: string;
 
     constructor(seedSupplier:{
         id?: number;
@@ -18,7 +17,7 @@ export class SeedSupplier{
         address:string;
         email:string;
         seedType:Crop;
-        role: Role;
+        role: string;
 
     }){
         this.validate(seedSupplier);
@@ -46,7 +45,7 @@ export class SeedSupplier{
     getSeedType():Crop{
         return this.seedType;
     }
-    validate(seedSupplier:{name:string;address:string;email:string;seedType:Crop,role:Role}){
+    validate(seedSupplier:{name:string;address:string;email:string;seedType:Crop,role:string}){
         if(!seedSupplier.name ){
             throw new Error('Name cannot be null');
         }
@@ -59,6 +58,9 @@ export class SeedSupplier{
         if(!seedSupplier.seedType){
             throw new Error('SeedType cannot be null');
         }
+        if(!seedSupplier.role){
+            throw new Error('role is required')
+        }
     }
 
     static from({
@@ -67,16 +69,17 @@ export class SeedSupplier{
         address,
         email,
         seedType,
-        roleId,
+        // roleId,
         role
-    }:SeedSupplierPrisma & {seedType:CropPrisma; role?:Role}){
+    }:SeedSupplierPrisma & {seedType:CropPrisma; role:string}){
         return new SeedSupplier({
             id,
             name,
             address,
             email,
             seedType:Crop.from(seedType),
-            role:role as Role
+            role
+            // role:role as Role
 
         });
     }

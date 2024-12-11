@@ -1,7 +1,7 @@
 import validator from 'validator';
 import {Farmer as FarmerPrisma
 }from '@prisma/client';
-import { Role } from '../types';
+import { th } from 'date-fns/locale';
 export class Farmer{
     private id?: number;
     private readonly name:string;
@@ -9,7 +9,7 @@ export class Farmer{
     private readonly email:string;
     private readonly farmingPractice:string;
     private readonly farmSizeInHectares:number;
-    private  readonly role?: Role;
+    private  readonly role: string;
 
     constructor (farmer:{
         id?: number;
@@ -18,7 +18,7 @@ export class Farmer{
         email:string
         farmingPractice:string;
         farmSizeInHectares:number;
-        role: Role;
+        role: string;
 
     }){
         this.id=farmer.id;
@@ -33,7 +33,7 @@ export class Farmer{
       
     }
 
-    validate(farmer:{name:string;email:string;farmingPractice:string;farmSizeInHectares:number;role:Role
+    validate(farmer:{name:string;email:string;farmingPractice:string;farmSizeInHectares:number;role:string
     }){
         if(!farmer.name){
             throw new Error('name must be provided');
@@ -43,6 +43,9 @@ export class Farmer{
         }
         if(farmer.farmSizeInHectares < 0){
             throw new Error('farm size can not be negative!!')
+        }
+        if(!farmer.role){
+            throw new Error('role is required')
         }
     }
 
@@ -61,7 +64,7 @@ export class Farmer{
     getfarmSizeInHectares():number{
         return this.farmSizeInHectares;
     }
-    getRole():Role|undefined{
+    getRole():string{
         return this.role
     }
     
@@ -71,16 +74,17 @@ export class Farmer{
         email,                     
         farmingPractice,         
         farmSizeInHectares,
-        roleId,
+        // roleId,
         role      
-    }:FarmerPrisma& {role?:Role}){
+    }:FarmerPrisma ){
         return new Farmer({
             id,                      
             name,                      
             email,                     
             farmingPractice,         
             farmSizeInHectares,
-            role:role as Role
+            role
+            // role:role as Role
 
         })
     }

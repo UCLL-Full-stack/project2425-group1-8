@@ -4,16 +4,16 @@ import {
     Crop as CropPrisma,
     Customer as CustomerPrisma
  } from '@prisma/client';
-import { Role } from "../types";
 import { UUID } from "crypto";
 export class Customer{
      readonly id?:number;
      readonly name:string;
      readonly address:string;
+     readonly password:string;
      readonly email:string;
      readonly cropPreference?:Array<Crop>;
-      readonly role?: Role;
-      readonly roleId?:number;
+      readonly role: string;
+    //   readonly roleId?:number;
 
 
     constructor(customer:{
@@ -23,14 +23,15 @@ export class Customer{
         address:string;
         email:string;
         cropPreference?:Array<Crop>;
-        role?: Role;
-        roleId?:number
+        role: string;
+        // roleId?:number
 
     }){
         this.validate(customer);
         this.id=customer.id;
         this.name=customer.name;
         this.address=customer.address;
+        this.password=customer.password;
         this.email=customer.email;
         this.cropPreference=customer.cropPreference;
         this.role = customer.role;
@@ -51,18 +52,21 @@ export class Customer{
     getEmail():string{
         return this.email;
     }
+    getPassword():string{
+        return this.password
+    }
 
     getCropPreference():Array<Crop>|undefined{
         return this.cropPreference;
     }
-    getRole():Role|undefined{
+    getRole():string{
         return this.role;
     }
-    getRoleId():number|undefined{
-        return this.roleId
-    }
+    // getRoleId():number|undefined{
+    //     return this.roleId
+    // }
 
-    validate(customer:{name:string;address:string;email:string;role?:Role}){
+    validate(customer:{name:string;address:string;email:string;role:string}){
         if(!customer.name){
             throw new Error('Name cannot be null');
         }
@@ -75,6 +79,9 @@ export class Customer{
         if(!validator.isEmail(customer.email)){
             throw new Error('Email format is invalid');
         }
+        if(!customer.role){
+            throw new Error('role cannot be null')
+        }
     }
 
     static from({
@@ -84,9 +91,9 @@ export class Customer{
         address,
         email,
         cropPreference,
-        roleId,
+        // roleId,
         role 
-    }:CustomerPrisma & {cropPreference?:CropPrisma[]; role?:Role}){
+    }:CustomerPrisma & {cropPreference?:CropPrisma[]; role:string}){
         return new Customer({
             id,
             name,
@@ -94,7 +101,8 @@ export class Customer{
             address,
             email,
             cropPreference:cropPreference?.map((cp)=>Crop.from(cp)),
-            role:role as Role
+            role
+            // role:role as Role
             
         })
 

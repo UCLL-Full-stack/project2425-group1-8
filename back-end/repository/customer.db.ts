@@ -1,7 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { Crop } from "../model/crop";
 import { Customer } from "../model/customer"
-import { CustomerInput, Role } from "../types";
 import database from "./database";
 
 const crop1=new Crop({
@@ -52,24 +51,36 @@ const getAllCustomers=async():Promise<Customer[]>=>{
     }
 };
 
-// const findCustomerByEmail=(email:string):Customer|undefined=>{
-//     return customers.find(customer=>customer.getEmail()===email);
-
-// }
+const findCustomerByEmail=async({email}:{email:string}):Promise<Customer|null>=>{
+    try{
+        const customerPrisma=await database.customer.findUnique({
+            where:{email}
+        })
+        return customerPrisma?Customer.from(customerPrisma):null;
+    }catch(error){
+        console.error(error);
+        throw new Error('Database error. Check logs. ')
+    }
+}
 
 
     
 // };
 const addCustomer = async (
-   customer:CustomerInput
+   customer:Customer
 ): Promise<Customer> => {
     try {
         // Prepare data for creating the customer
-        const data: Prisma.CustomerCreateInput = {
-            name: customer.name,
-            password:customer.password,
-            address: customer.address,
-            email: customer.email,
+        const createdCustomer=await database.customer.create({
+            data:{
+                name: customer.getName(),
+                password:customer.getPassword(),
+                address: customer.getAddress(),
+                email: customer.getEmail(),
+                role:customer.getRole()
+
+            }
+        })
             // role: {
             //     connect: { id: customer.roleId }, // Connect the existing role
             // },
@@ -78,10 +89,6 @@ const addCustomer = async (
             //         connect: customer.cropPreference.map((id) => ({ id })),
             //     },
             // }),
-        };
-
-        // Create the customer
-        const createdCustomer = await database.customer.create({ data });
 
         return Customer.from(createdCustomer); // Return the created customer
     } catch (error) {
@@ -90,10 +97,20 @@ const addCustomer = async (
     }
 };
 
-// const getCustomerByName=({name}:{name: string }):Customer | null=>{
-//     return customers.find((customer)=>customer.getName()==name) || null;
-// };
-export default {getAllCustomers,/*findCustomerByEmail,getCustomerByName,*/addCustomer};
+const getCustomerByName=async({name}:{name: string }):Promise<Customer | null>=>{
+    try{
+        const customerPrisma=await database.customer.findFirst({
+            where:{name}
+        })
+        return customerPrisma?Customer.from(customerPrisma):null;
+    }catch(error){
+        console.error(error);
+        throw new Error('database error. check logs')
+    }
+};
+
+
+export default {getAllCustomers,findCustomerByEmail,getCustomerByName,addCustomer};
 
 
 

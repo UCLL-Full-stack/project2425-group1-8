@@ -8,12 +8,14 @@ const crop1=new Crop({name:"maize",purchasePrice:10,marketPrice:40,totalYield:20
 const name="Alex"
 const address="Hassrode"
 const email="alex123@gmail.com"
+const password='alex123'
 const cropPreference=[crop1]
 test("given: Valid Fields When: Creating Customer then: A Customer Is Created With Those Fields",()=>{
 //when
 const role='customer'
 const customer=new Customer({
     name,
+    password,
     address,
     email,
     cropPreference,

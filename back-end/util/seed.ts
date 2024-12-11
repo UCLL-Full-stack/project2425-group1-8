@@ -11,25 +11,25 @@ const main = async()=> {
     await prisma.farmer.deleteMany();
     await prisma.resource.deleteMany();
     await prisma.seedSupplier.deleteMany();
-    await prisma.role.deleteMany();
+    // await prisma.role.deleteMany();
 
-    const farmerRole = await prisma.role.create({
-        data: {
-            name: 'farmer',
-        },
-    });
+    // const farmerRole = await prisma.role.create({
+    //     data: {
+    //         name: 'farmer',
+    //     },
+    // });
 
-    const customerRole = await prisma.role.create({
-        data: {
-            name: 'customer',
-        },
-    });
+    // const customerRole = await prisma.role.create({
+    //     data: {
+    //         name: 'customer',
+    //     },
+    // });
 
-    const seedSupplierRole = await prisma.role.create({
-        data: {
-            name: 'seedSupplier',
-        },
-    });
+    // const seedSupplierRole = await prisma.role.create({
+    //     data: {
+    //         name: 'seedSupplier',
+    //     },
+    // });
     const Millet = await prisma.crop.create({
         data: {
             name:'Millet',
@@ -70,9 +70,7 @@ const main = async()=> {
             cropPreference:{
                 connect:[{id:Oats.id},{id:Millet.id}]
             },
-            role: {
-                connect: { id: customerRole.id },
-            }
+            role:'customer'
         }
     });
     const customerTwo = await prisma.customer.create({
@@ -84,9 +82,7 @@ const main = async()=> {
             cropPreference:{
                 connect:[{id:Sorghum.id}]
             },
-            role: {
-                connect: { id: customerRole.id },
-            }
+            role: 'customer'
         }
     });
     const customerThree = await prisma.customer.create({
@@ -98,9 +94,7 @@ const main = async()=> {
             cropPreference:{
                 connect:[{id:Oats.id}]
             },
-            role: {
-                connect: { id: customerRole.id },
-            }
+            role: 'customer'
         }
     });
     const customerFour = await prisma.customer.create({
@@ -112,9 +106,7 @@ const main = async()=> {
             cropPreference:{
                 connect:[{id:Oats.id},{id:Sorghum.id}]
             },
-            role: {
-                connect: { id: customerRole.id },
-            }
+            role: 'customer'
         }
     });
 
@@ -125,9 +117,7 @@ const main = async()=> {
             email:"yusufdoe@gmail.com",
             farmingPractice:"agroforestry",
             farmSizeInHectares:200,
-            role: {
-                connect: { id: farmerRole.id },
-            }
+            role: 'farmer'
         }
             
 });
@@ -157,9 +147,7 @@ const seedSupplier1=await prisma.seedSupplier.create({
         seedType:{
             connect: {id: Sorghum.id}
         },
-        role: {
-            connect: { id: seedSupplierRole.id },
-        }
+        role: 'seedSupplier'
     }
 });
 const seedSupplier2=await prisma.seedSupplier.create({
@@ -171,9 +159,7 @@ const seedSupplier2=await prisma.seedSupplier.create({
         seedType:{
             connect: {id: Millet.id}
         },
-        role: {
-            connect: { id: seedSupplierRole.id },
-        }
+        role: 'seedSupplier'
     }
     });
 

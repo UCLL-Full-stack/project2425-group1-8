@@ -126,7 +126,7 @@ customerRouter.post('/', async (req: Request, res: Response, next: NextFunction)
  */
 customerRouter.get('/:name',async(req: Request,res:Response, next: NextFunction)=>{
     try {
-        const customer=await customerService.getCustomerByName((req.params.name));
+        const customer=await customerService.getCustomerByName({name:req.params.name});
         res.status(200).json(customer)
     } catch (error) {
         next(error);

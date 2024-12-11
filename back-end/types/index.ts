@@ -1,4 +1,4 @@
-type Role='farmer'|'customer'|'seedSupplier';
+// type Role='farmer'|'customer'|'seedSupplier';
 // type UserInput={
 //     id?:number;
 //     username:string;
@@ -25,7 +25,7 @@ type FarmerInput={
         email:string
         farmingPractice:string;
         farmSizeInHectares:number;
-        role:Role;
+        role:string;
         // user:UserInput;
 
 };
@@ -37,7 +37,7 @@ type CustomerInput={
         address:string;
         email:string;
         cropPreference?:CropInput[]; 
-        role?:Role;  
+        role:string;  
         // user:UserInput;
 
 };
@@ -48,7 +48,7 @@ type SeedSupplierInput={
         address:string;
         email:string;
         seedType:CropInput[];
-        role:Role;
+        role:string;
 };
 
 type ResourceInput={
@@ -66,7 +66,6 @@ type AuthenticationResponse={
 };
 
 export{
-    Role,
     CropInput,
     FarmerInput,
     SeedSupplierInput,
