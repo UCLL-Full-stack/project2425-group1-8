@@ -63,9 +63,9 @@ const UserLoginForm = () => {
     <form className="text-center" onSubmit={handleSubmit}>
       {/* <h2>Welcome back</h2> */}
       <p> You can sign in to your page</p>
-      {/* <p>
-        Already registered? <a href="/signIn">Sign in </a>
-      </p> */}
+      {<p>
+        Don't have account? create your account <a href="/login/signUp">Sign up</a>
+      </p> }
       <div className="mb-2 flex ">
         <label htmlFor="name" className=" mb-1">
           Username:

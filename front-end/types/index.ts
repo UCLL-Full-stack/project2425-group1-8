@@ -1,4 +1,4 @@
-type Role='farmer'|'customer'|'seedSupplier';
+export type Role='farmer'|'customer'|'seedSupplier';
 
 export type Crop={
     id:number;
@@ -15,7 +15,7 @@ export type Customer={
         name:string;
         address:string;
         email:string;
-        cropPreference:Crop[]; 
+        cropPreference?:Crop[]; 
         role:Role;  
 }
 

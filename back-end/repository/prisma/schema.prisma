@@ -22,9 +22,9 @@ model Customer {
     password        String 
     address         String
     email           String          @unique
-    cropPreference  Crop[]
-    role            Role    @relation(fields: [roleId], references: [id])
-    roleId          Int
+    cropPreference  Crop[]?
+    role            Role?    @relation(fields: [roleId], references: [id])
+    roleId          Int?
 
 
 }

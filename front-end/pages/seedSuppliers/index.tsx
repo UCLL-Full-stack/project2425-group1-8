@@ -1,3 +1,4 @@
+import Header from "@/components/header";
 import SeedSuppliersOverView from "@/components/SeedSuppliers/SeedSuppliersOverView";
 import SeedSupplierService from "@/service/SeedSupplier";
 import { SeedSupplier } from "@/types";
@@ -30,6 +31,7 @@ const SeedSuppliers = () => {
       <Head>
         <title>Seed Suppliers</title>
       </Head>
+      <Header/>
       <main className="d-flex flex-column justify-content-center align-items-center">
         <h2>Seed Suppliers Overview</h2>
         {seedSuppliers.length > 0 ? (

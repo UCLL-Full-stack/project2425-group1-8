@@ -1,3 +1,5 @@
+import { Crop, Customer, Role } from "@/types";
+
 const getAllCustomers=()=>{
     return fetch(process.env.NEXT_PUBLIC_API_URL +"/customers",{
         method:"GET",
@@ -14,10 +16,21 @@ const getCustomerByName=(customerName:string)=>{
         },
     })
 }
+const addCustomer=(name: string, role: string, address: string, email: string )=>{
+    return fetch(process.env.NEXT_PUBLIC_API_URL +`/customers`,{
+        method: "POST",
+        headers:{
+            "content-Type":"application/json",
+        },
+        body: JSON.stringify({name: name, role: role, address: address, email: email})
+
+    })
+}
 
 const CustomerService ={
     getAllCustomers,
     getCustomerByName,
+    addCustomer,
 };
 
 export default CustomerService;

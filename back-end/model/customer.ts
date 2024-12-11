@@ -5,22 +5,26 @@ import {
     Customer as CustomerPrisma
  } from '@prisma/client';
 import { Role } from "../types";
+import { UUID } from "crypto";
 export class Customer{
-    private readonly id?:number;
-    private readonly name:string;
-    private readonly address:string;
-    private readonly email:string;
-    private readonly cropPreference:Array<Crop>;
-    private  readonly role?: Role;
+     readonly id?:number;
+     readonly name:string;
+     readonly address:string;
+     readonly email:string;
+     readonly cropPreference?:Array<Crop>;
+      readonly role?: Role;
+      readonly roleId?:number;
 
 
     constructor(customer:{
         id?:number;
         name:string;
+        password:string;
         address:string;
         email:string;
-        cropPreference:Array<Crop>;
-        role: Role;
+        cropPreference?:Array<Crop>;
+        role?: Role;
+        roleId?:number
 
     }){
         this.validate(customer);
@@ -48,11 +52,17 @@ export class Customer{
         return this.email;
     }
 
-    getCropPreference():Array<Crop>{
+    getCropPreference():Array<Crop>|undefined{
         return this.cropPreference;
     }
+    getRole():Role|undefined{
+        return this.role;
+    }
+    getRoleId():number|undefined{
+        return this.roleId
+    }
 
-    validate(customer:{name:string;address:string;email:string;role:Role}){
+    validate(customer:{name:string;address:string;email:string;role?:Role}){
         if(!customer.name){
             throw new Error('Name cannot be null');
         }
@@ -70,18 +80,20 @@ export class Customer{
     static from({
         id,
         name,
+        password,
         address,
         email,
         cropPreference,
         roleId,
         role 
-    }:CustomerPrisma & {cropPreference:CropPrisma[]; role?:Role}){
+    }:CustomerPrisma & {cropPreference?:CropPrisma[]; role?:Role}){
         return new Customer({
             id,
             name,
+            password,
             address,
             email,
-            cropPreference:cropPreference.map((cp)=>Crop.from(cp)),
+            cropPreference:cropPreference?.map((cp)=>Crop.from(cp)),
             role:role as Role
             
         })

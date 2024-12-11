@@ -33,10 +33,11 @@ type FarmerInput={
 type CustomerInput={
         id?:number;
         name:string;
+        password:string;
         address:string;
         email:string;
-        cropPreference:CropInput[]; 
-        role:Role;  
+        cropPreference?:CropInput[]; 
+        role?:Role;  
         // user:UserInput;
 
 };

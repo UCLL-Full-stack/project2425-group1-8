@@ -26,12 +26,14 @@ const customers:Customer[]= [
         name:"Alex",
         address:"Hassrode",
         email:"alex123@gmail.com",
+        role:"customer",
         cropPreference:[crop]
     }),
     new Customer({
         name:"Alexis",
         address:"Ghent",
         email:"alexis123@gmail.com",
+        role:"customer",
         cropPreference:[]
     })
 ];

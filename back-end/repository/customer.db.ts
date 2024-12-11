@@ -1,5 +1,7 @@
+import { Prisma } from "@prisma/client";
 import { Crop } from "../model/crop";
 import { Customer } from "../model/customer"
+import { CustomerInput, Role } from "../types";
 import database from "./database";
 
 const crop1=new Crop({
@@ -19,24 +21,24 @@ const crop2=new  Crop({
         attentionRange:4,
         growthDurationInMonths:9});
 const role='customer'
-const customers=[
-    new Customer({
-        id:1,
-        name:"Alex",
-        address:"Hassrode",
-        email:"alex123@gmail.com",
-        cropPreference:[crop1],
-        role
-    }),
-    new Customer({
-        id:2,
-        name:"Alexis",
-        address:"Ghent",
-        email:"alexis123@gmail.com",
-        cropPreference:[crop1,crop2],
-        role
-    })
-];
+// const customers=[
+//     new Customer({
+//         id:1,
+//         name:"Alex",
+//         address:"Hassrode",
+//         email:"alex123@gmail.com",
+//         cropPreference:[crop1],
+//         role
+//     }),
+//     new Customer({
+//         id:2,
+//         name:"Alexis",
+//         address:"Ghent",
+//         email:"alexis123@gmail.com",
+//         cropPreference:[crop1,crop2],
+//         role
+//     })
+// ];
 
 const getAllCustomers=async():Promise<Customer[]>=>{
     try{
@@ -50,20 +52,48 @@ const getAllCustomers=async():Promise<Customer[]>=>{
     }
 };
 
-const findCustomerByEmail=(email:string):Customer|undefined=>{
-    return customers.find(customer=>customer.getEmail()===email);
+// const findCustomerByEmail=(email:string):Customer|undefined=>{
+//     return customers.find(customer=>customer.getEmail()===email);
 
-}
+// }
 
-const addCustomer = (customer:Customer):Customer=>{
-    customers.push(customer);
-    return customer;
-}
 
-const getCustomerByName=({name}:{name: string }):Customer | null=>{
-    return customers.find((customer)=>customer.getName()==name) || null;
+    
+// };
+const addCustomer = async (
+   customer:CustomerInput
+): Promise<Customer> => {
+    try {
+        // Prepare data for creating the customer
+        const data: Prisma.CustomerCreateInput = {
+            name: customer.name,
+            password:customer.password,
+            address: customer.address,
+            email: customer.email,
+            // role: {
+            //     connect: { id: customer.roleId }, // Connect the existing role
+            // },
+            // ...(customer.cropPreference && {
+            //     cropPreference: {
+            //         connect: customer.cropPreference.map((id) => ({ id })),
+            //     },
+            // }),
+        };
+
+        // Create the customer
+        const createdCustomer = await database.customer.create({ data });
+
+        return Customer.from(createdCustomer); // Return the created customer
+    } catch (error) {
+        console.error('Error adding customer:', error);
+        throw new Error('Failed to add customer to the database.');
+    }
 };
-export default {getAllCustomers,findCustomerByEmail,addCustomer,getCustomerByName};
+
+// const getCustomerByName=({name}:{name: string }):Customer | null=>{
+//     return customers.find((customer)=>customer.getName()==name) || null;
+// };
+export default {getAllCustomers,/*findCustomerByEmail,getCustomerByName,*/addCustomer};
 
 
 

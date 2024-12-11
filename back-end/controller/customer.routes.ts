@@ -46,6 +46,7 @@
 import express, { NextFunction, Request, Response } from 'express';
 import customerService from '../service/customer.service';
 import { CustomerInput } from '../types';
+import { Customer } from '../model/customer';
 
 const customerRouter = express.Router();
 
