@@ -1,3 +1,5 @@
+'use client'
+
 import { useRouter } from "next/router"
 import { useState } from "react";
 import {Crop, Role} from '@types';
@@ -9,7 +11,7 @@ import classNames from "classnames";
 const UserSignup : React.FC = ()=>{
 const router=useRouter();
 const [name,setName]=useState<string>("");
-const [role,setRole]=useState<Role>("customer");
+const [role,setRole]=useState<string>("");
 const [selectedOption,setselectedOption]=useState("");
 const [email,setEmail]=useState<string>("")
 const [address,setAddress]=useState<string>("")
@@ -23,9 +25,9 @@ const validate= ()=>{
     if(!name||name?.trim()===""){
         result=false;
         console.log("nameerror")
-    }else if (!role||role?.trim()===""){
-        result=false;
-        console.log("roleerror")
+    // }else if (!selectedOption||selectedOption?.trim()===""){
+    //     result=false;
+    //     console.log("roleerror")
 
     }else if(!email||email?.trim()==="") {
         result=false;
@@ -47,11 +49,21 @@ const handleSubmit = async (event:React.FormEvent)=>{
         console.log("exiting")
         return;
     }
+
     sessionStorage.setItem("newUser",name);
+    
+
     // sessionStorage.setItem("userRole",selectedOption);
-    setPassword(password)
-   const response= await UserService.addUsers(name,password,role,address,email);
- if (response.ok) {
+    // if(!sessionStorage.getItem(selectedOption)){
+    //     setRole("customer")
+    // }else if(sessionStorage.getItem(selectedOption)){
+    //     setRole(selectedOption)
+    // }
+    
+
+   const response= await UserService.addUsers(name,password,email,address, role||"customer");
+   console.log(response)
+ if (response.name) {
     console.log("User added successfully!");
 } else {
     console.error("Failed to add user.");
@@ -61,8 +73,8 @@ return response;
 
 const handleChange= (e:React.ChangeEvent<HTMLSelectElement>)=>{
     const value=e.target.value;
-    // setselectedOption(value);
-    setRole(role)
+    setselectedOption(value);
+    setRole(value);
     sessionStorage.setItem("selectedOption", value);
 };
 
@@ -80,7 +92,7 @@ return(
         <label htmlFor="password">
             Password:
         </label>
-        <input type="text" value={password} onChange={(event)=>setPassword(event.target.value)} 
+        <input type="password" value={password} onChange={(event)=>setPassword(event.target.value)} 
         className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue:500 block w-full p-2.5"
         />
 
@@ -120,7 +132,7 @@ return(
         
 
     </div>
-    <button type="submit" className="px-5   ">
+    <button type="submit" className="px-5 py-2 bg-blue-500 text-white rounded-lg">
             SignUp
         </button>
     </form>

@@ -1,17 +1,17 @@
 import { Crop, Role,Customer } from "@/types";
 import CustomerService from "./CustomerService";
 const UserService ={
- addUsers: async (name:string,password:string,role:Role,address:string,email:string) =>{
+ addUsers: async (name:string,password:string,email:string ,address:string ,role:string) =>{
     if(role==="customer"){
         const customer:Customer =({
             name:name,
             password:password,
-            address:address,
             email:email,
+            address:address,
             role:role
         })
-      const response= await CustomerService.addCustomer(name, password,email, address, role)
-      return response.json()
+      const response= await CustomerService.addCustomer(customer)
+      return response?.json()
     }else if(role==="farmer"){
             return "not yet implemented"
         }else if(role==="seedSupplier"){

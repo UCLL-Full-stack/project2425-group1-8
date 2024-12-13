@@ -22,6 +22,7 @@ app.use('/seedSuppliers',seedSupplierRouter);
 app.use('/resources',resourceRouter);
 app.use('/crops',cropRouter);
 app.use('/farmer',farmerRouter);
+app.use('/login/signup',customerRouter);
 
 app.get('/status', (req, res) => {
     res.json({ message: 'Back-end is running...' });

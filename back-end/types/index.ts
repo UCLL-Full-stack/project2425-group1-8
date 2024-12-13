@@ -34,8 +34,8 @@ type CustomerInput={
         id?:number;
         name:string;
         password:string;
-        address:string;
         email:string;
+        address:string;
         cropPreference?:CropInput[]; 
         role:string;  
         // user:UserInput;

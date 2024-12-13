@@ -96,8 +96,11 @@ customerRouter.get('/', async (req: Request, res: Response, next: NextFunction) 
 customerRouter.post('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const customer = <CustomerInput>req.body;
+        console.log(customer)
+
         const result = await customerService.addCustomer(customer);
         res.status(200).json(result);
+        
     } catch (error) {
         next(error);
     }

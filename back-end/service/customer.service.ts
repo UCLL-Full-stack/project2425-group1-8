@@ -10,8 +10,8 @@ const getAllCustomers = async (): Promise<Customer[]> => {
 const addCustomer =async ({
     name,
     password,
-    address,
     email, 
+    address,
     role
 }: CustomerInput): Promise<Customer> => {
     const existingCustomer = customerDb.findCustomerByEmail({email});
@@ -20,7 +20,8 @@ const addCustomer =async ({
         throw new Error('This customer already exists in the database.');
     }
     const hashedPassword = await bcrypt.hash(password, 12);
-    const createdCustomer=new Customer({ name,password:hashedPassword, address, email,role});
+    const createdCustomer=new Customer({ name,password:hashedPassword, email, address, role});
+    customerDb.addCustomer(createdCustomer);
     return createdCustomer  
   }
 

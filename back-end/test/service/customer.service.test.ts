@@ -25,12 +25,14 @@ const customers:Customer[]= [
     new Customer({
         name:"Alex",
         address:"Hassrode",
+        password:"alexman123",
         email:"alex123@gmail.com",
         role:"customer",
         cropPreference:[crop]
     }),
     new Customer({
         name:"Alexis",
+        password:"alexis123",
         address:"Ghent",
         email:"alexis123@gmail.com",
         role:"customer",

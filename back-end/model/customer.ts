@@ -8,9 +8,9 @@ import { UUID } from "crypto";
 export class Customer{
      readonly id?:number;
      readonly name:string;
-     readonly address:string;
      readonly password:string;
      readonly email:string;
+     readonly address:string;
      readonly cropPreference?:Array<Crop>;
       readonly role: string;
     //   readonly roleId?:number;
@@ -20,8 +20,8 @@ export class Customer{
         id?:number;
         name:string;
         password:string;
-        address:string;
         email:string;
+        address:string;
         cropPreference?:Array<Crop>;
         role: string;
         // roleId?:number
@@ -66,9 +66,12 @@ export class Customer{
     //     return this.roleId
     // }
 
-    validate(customer:{name:string;address:string;email:string;role:string}){
+    validate(customer:{name:string;password:string;email:string;address:string;role:string}){
         if(!customer.name){
             throw new Error('Name cannot be null');
+        }
+        if(!customer.password){
+            throw new Error('password cannot be null');
         }
         if(!customer.address ){
             throw new Error('Address cannot be null');
@@ -88,8 +91,8 @@ export class Customer{
         id,
         name,
         password,
-        address,
         email,
+        address,
         cropPreference,
         // roleId,
         role 
@@ -98,8 +101,8 @@ export class Customer{
             id,
             name,
             password,
-            address,
             email,
+            address,
             cropPreference:cropPreference?.map((cp)=>Crop.from(cp)),
             role
             // role:role as Role

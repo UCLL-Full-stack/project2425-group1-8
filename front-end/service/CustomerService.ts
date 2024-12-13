@@ -16,15 +16,21 @@ const getCustomerByName=(customerName:string)=>{
         },
     })
 }
-const addCustomer=(name: string,password:string,  address: string , email: string , role: Role)=>{
-    return fetch(process.env.NEXT_PUBLIC_API_URL +`/customers`,{
-        method: "POST",
-        headers:{
-            "content-Type":"application/json",
-        },
-        body: JSON.stringify({name: name ,password:password, address: address , email: email, role: role})
+const addCustomer=(customer:Customer)=>{
+    try {
+        const response = fetch(process.env.NEXT_PUBLIC_API_URL + "/customers",{
+            method: "POST",
+            headers:{
+                "Content-Type":"application/json",
+            },
+            body: JSON.stringify(customer)
 
-    })
+        })
+        console.log(response)
+        return response
+    }    catch (e: unknown) {
+        console.error(e)
+    }
 }
 
 const CustomerService ={
