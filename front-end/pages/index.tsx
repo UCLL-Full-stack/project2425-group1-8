@@ -1,6 +1,9 @@
 import Head from "next/head";
 import styles from "@styles/Home.module.css";
+import Image from "next/image";
 import Header from "@/components/header";
+import home from "../images/home.jpg";
+
 const Home: React.FC = () => {
   return (
     <>
@@ -12,9 +15,18 @@ const Home: React.FC = () => {
       </Head>
       <Header />
       <main className={styles.main}>
-        <span>
+        {/* <span>
           <h1>Welcome!</h1>
-        </span>
+        </span> */}
+        <div className={styles.imageContainer}>
+          <Image
+            src={home}
+            alt="Agriculture Field"
+            width={1500}
+            height={600}
+            className="rounded shadow-sm"
+          />
+        </div>
       </main>
     </>
   );

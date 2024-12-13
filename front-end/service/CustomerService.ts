@@ -16,9 +16,9 @@ const getCustomerByName=(customerName:string)=>{
         },
     })
 }
-const addCustomer=(customer:Customer)=>{
+const addCustomer=(customer:Customer) =>{
     try {
-        const response = fetch(process.env.NEXT_PUBLIC_API_URL + "/customers",{
+        const customerPromise: Promise<Response> = fetch(process.env.NEXT_PUBLIC_API_URL + "/customers",{
             method: "POST",
             headers:{
                 "Content-Type":"application/json",
@@ -26,8 +26,7 @@ const addCustomer=(customer:Customer)=>{
             body: JSON.stringify(customer)
 
         })
-        console.log(response)
-        return response
+        return customerPromise
     }    catch (e: unknown) {
         console.error(e)
     }

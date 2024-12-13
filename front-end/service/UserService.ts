@@ -1,7 +1,7 @@
 import { Crop, Role,Customer } from "@/types";
 import CustomerService from "./CustomerService";
 const UserService ={
- addUsers: async (name:string,password:string,email:string ,address:string ,role:string) =>{
+ addUsers: async (name:string,password:string,email:string ,address:string ,role:string): Promise<Customer | string>  =>{
     if(role==="customer"){
         const customer:Customer =({
             name:name,
@@ -10,7 +10,7 @@ const UserService ={
             address:address,
             role:role
         })
-      const response= await CustomerService.addCustomer(customer)
+      const response = await CustomerService.addCustomer(customer)
       return response?.json()
     }else if(role==="farmer"){
             return "not yet implemented"
