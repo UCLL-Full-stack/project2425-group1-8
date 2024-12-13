@@ -13,6 +13,7 @@ export type Crop={
 export type Customer={
     id?:number;
         name:string;
+        password:string;
         address:string;
         email:string;
         cropPreference?:Crop[]; 

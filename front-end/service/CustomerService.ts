@@ -16,13 +16,13 @@ const getCustomerByName=(customerName:string)=>{
         },
     })
 }
-const addCustomer=(name: string, role: string, address: string, email: string )=>{
+const addCustomer=(name: string,password:string,  address: string , email: string , role: Role)=>{
     return fetch(process.env.NEXT_PUBLIC_API_URL +`/customers`,{
         method: "POST",
         headers:{
             "content-Type":"application/json",
         },
-        body: JSON.stringify({name: name, role: role, address: address, email: email})
+        body: JSON.stringify({name: name ,password:password, address: address , email: email, role: role})
 
     })
 }
