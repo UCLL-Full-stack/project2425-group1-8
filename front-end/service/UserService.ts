@@ -11,7 +11,7 @@ const UserService ={
             address:address,
             role:role
         })
-      const response= await CustomerService.addCustomer(customer)
+      const response = await CustomerService.addCustomer(customer)
       return response?.json()
     }else if(role==="seedSupplier"){
         const seedSupplier:SeedSupplier=({

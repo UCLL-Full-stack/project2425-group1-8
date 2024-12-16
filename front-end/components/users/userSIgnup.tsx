@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react";
@@ -43,38 +43,51 @@ const [selectedCrop,setSelectedCrop]=useState<Crop>(defaultCrop);
     }, []);
 
 
-const validate= ()=>{
-    let result= true;
-    if(!name||name?.trim()===""){
-        result=false;
-        console.log("nameerror")
-    // }else if (!selectedOption||selectedOption?.trim()===""){
-    //     result=false;
-    //     console.log("roleerror")
+// const validate= ()=>{
+//     let result= true;
+//     if(!name||name?.trim()===""){
+//         result=false;
+//         console.log("nameerror")
+//     // }else if (!selectedOption||selectedOption?.trim()===""){
+//     //     result=false;
+//     //     console.log("roleerror")
 
-    }else if(!email||email?.trim()==="") {
-        result=false;
-        console.log("emailerror")
+//     }else if(!email||email?.trim()==="") {
+//         result=false;
+//         console.log("emailerror")
 
-    }else if(!password||password?.trim()===""){
-        result=false;
-        console.log("passworderror")
+//     }else if(!password||password?.trim()===""){
+//         result=false;
+//         console.log("passworderror")
 
+  const validate = () => {
+    let result = true;
+    if (!name || name?.trim() === "") {
+      result = false;
+      console.log("nameerror");
+      // }else if (!selectedOption||selectedOption?.trim()===""){
+      //     result=false;
+      //     console.log("roleerror")
+    } else if (!email || email?.trim() === "") {
+      result = false;
+      console.log("emailerror");
+    } else if (!password || password?.trim() === "") {
+      result = false;
+      console.log("passworderror");
     }
 
     return result;
-};
+  };
 
-const handleSubmit = async (event:React.FormEvent)=>{
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (!validate()){
-        console.log("exiting")
-        return;
+    if (!validate()) {
+      console.log("exiting");
+      return;
     }
 
-    sessionStorage.setItem("newUser",name);
-    
+    sessionStorage.setItem("newUser", name);
 
     // sessionStorage.setItem("userRole",selectedOption);
     // if(!sessionStorage.getItem(selectedOption)){
@@ -82,7 +95,6 @@ const handleSubmit = async (event:React.FormEvent)=>{
     // }else if(sessionStorage.getItem(selectedOption)){
     //     setRole(selectedOption)
     // }
-    
 
    const response= await UserService.addUsers(name,password,email,address, role||"customer",selectedCrop);
    console.log(response)
@@ -94,14 +106,14 @@ const handleSubmit = async (event:React.FormEvent)=>{
 return response;
 }
 
-const handleChange= (e:React.ChangeEvent<HTMLSelectElement>)=>{
-    const value=e.target.value;
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
     setselectedOption(value);
     setRole(value);
     sessionStorage.setItem("selectedOption", value);
-};
+  };
 
-return(
+  return (
     <>
     <div className="text-center">
     <h3>User SignUp</h3>
@@ -121,20 +133,20 @@ return(
         className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue:500 block w-full p-2.5"
         />
 
-        <label htmlFor="password">
-            Email:
-        </label>
-        <input type="text" value={email} onChange={(event)=>setEmail(event.target.value)} 
-        className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue:500 block w-full "
-
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue:500 block w-full p-2.5"
         />
 
-        <label htmlFor="address">
-            Address:
-        </label>
-        <input type="text" value={address} onChange={(event)=>setAddress(event.target.value)} 
-        className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue:500 block w-full p-2.5"
-
+        <label htmlFor="password">Email:</label>
+        <input
+          type="text"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue:500 block w-full "
         />
 
         </div>
@@ -170,8 +182,6 @@ return(
     </form>
     </div>
     </>
-)
-
+  );
 };
-
 export default UserSignup;
