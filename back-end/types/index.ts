@@ -45,9 +45,10 @@ type CustomerInput={
 type SeedSupplierInput={
         id?:number;
         name:string;
+        password:string;
         address:string;
         email:string;
-        seedType:CropInput[];
+        seedType:CropInput;
         role:string;
 };
 

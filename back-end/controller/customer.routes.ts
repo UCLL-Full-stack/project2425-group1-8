@@ -13,6 +13,9 @@
  *         name:
  *           type: string
  *           description: Customer name.
+ *         password:
+ *           type: string
+ *           description: Customer password.
  *         address:
  *           type: string
  *           description: Customer address.
@@ -30,6 +33,9 @@
  *         name:
  *           type: string
  *           description: Customer name.
+ *         password:
+ *           type: string
+ *           description: customer password.
  *         address:
  *           type: string
  *           description: Customer address.

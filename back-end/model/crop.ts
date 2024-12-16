@@ -3,8 +3,8 @@ import {
  } from '@prisma/client';
 export class Crop{
    
-    private readonly id?:number;
-    private readonly name:string;
+     readonly id?:number;
+     readonly name:string;
     private readonly purchasePrice:number|undefined;
     private readonly marketPrice:number;
     private readonly totalYield:number;

@@ -21,15 +21,19 @@ const crop=new Crop({
 const seedSupliers:SeedSupplier[]= [
     new SeedSupplier({
         name:"Fletcher",
+        password:"flitcher123",
         address:"Genk",
         email:"fletcher123@gmail.com",
-        seedType:crop
+        seedType:crop,
+        role:"seedSupplier"
     }),
     new SeedSupplier({
         name:"Fletcheris",
+        password:"fletchers123",
         address:"Luik",
         email:"fletcheris123@gmail.com",
-        seedType:crop
+        seedType:crop,
+        role:"seedsupplier"
     })
 ];
 

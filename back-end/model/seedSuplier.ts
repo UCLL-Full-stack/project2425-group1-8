@@ -4,16 +4,18 @@ import {
     Crop as CropPrisma,
 } from '@prisma/client'
 export class SeedSupplier{
-    private id?: number;
-    private readonly name:string;
-    private readonly address:string;
-    private readonly email:string;
-    private readonly seedType:Crop;
-    private  readonly role: string;
+     id?: number;
+     readonly name:string;
+     readonly address:string;
+     readonly password:string;
+     readonly email:string;
+     readonly seedType:Crop;
+    readonly role: string;
 
     constructor(seedSupplier:{
         id?: number;
         name:string;
+        password:string;
         address:string;
         email:string;
         seedType:Crop;
@@ -23,6 +25,7 @@ export class SeedSupplier{
         this.validate(seedSupplier);
         this.id=seedSupplier.id;
         this.name=seedSupplier.name;
+        this.password=seedSupplier.password;
         this.address=seedSupplier.address;
         this.email=seedSupplier.email;
         this.seedType=seedSupplier.seedType;
@@ -45,7 +48,7 @@ export class SeedSupplier{
     getSeedType():Crop{
         return this.seedType;
     }
-    validate(seedSupplier:{name:string;address:string;email:string;seedType:Crop,role:string}){
+    validate(seedSupplier:{name:string; password:string;address:string;email:string;seedType:Crop,role:string}){
         if(!seedSupplier.name ){
             throw new Error('Name cannot be null');
         }
@@ -61,11 +64,15 @@ export class SeedSupplier{
         if(!seedSupplier.role){
             throw new Error('role is required')
         }
+        if(!seedSupplier.password){
+            throw new Error('password is required')
+        }
     }
 
     static from({
         id,
         name,
+        password,
         address,
         email,
         seedType,
@@ -75,12 +82,13 @@ export class SeedSupplier{
         return new SeedSupplier({
             id,
             name,
+            password,
             address,
             email,
             seedType:Crop.from(seedType),
             role
             // role:role as Role
-
+            
         });
     }
 }

@@ -1,12 +1,14 @@
 'use client'
 
 import { useRouter } from "next/router"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {Crop, Role} from '@types';
 import CustomerService from "@/service/CustomerService";
 import UserService from "@/service/UserService";
 import React from "react";
 import classNames from "classnames";
+import CropsOverviewTable from "../crops/CropsOverviewTable";
+import CropService from "@/service/CropService";
 
 const UserSignup : React.FC = ()=>{
 const router=useRouter();
@@ -17,7 +19,28 @@ const [email,setEmail]=useState<string>("")
 const [address,setAddress]=useState<string>("")
 const [cropPreference,setcropPreference]=useState<Crop[]>([])
 const [password,setPassword]=useState<string>("");
+const [crops, setCrops] = useState<Crop[]>([]); 
 
+
+const defaultCrop= {
+    "name":"Sorghum",
+    "purchasePrice":20,
+    "marketPrice":40,
+    "totalYield":100,
+    "attentionRange":3,
+    "growthDurationInMonths":6
+}
+const [selectedCrop,setSelectedCrop]=useState<Crop>(defaultCrop);
+
+
+    const getCrops = async () => {
+      const response = await CropService.getAllCrops();
+      const cropsData = await response.json();
+      setCrops(cropsData as Crop[])
+    };
+    useEffect(() => {
+      getCrops();
+    }, []);
 
 
 const validate= ()=>{
@@ -61,7 +84,7 @@ const handleSubmit = async (event:React.FormEvent)=>{
     // }
     
 
-   const response= await UserService.addUsers(name,password,email,address, role||"customer");
+   const response= await UserService.addUsers(name,password,email,address, role||"customer",selectedCrop);
    console.log(response)
  if (response.name) {
     console.log("User added successfully!");
@@ -80,8 +103,10 @@ const handleChange= (e:React.ChangeEvent<HTMLSelectElement>)=>{
 
 return(
     <>
+    <div className="text-center">
     <h3>User SignUp</h3>
-    <form onSubmit={handleSubmit} className="text-center">
+    <form onSubmit={handleSubmit} >
+         <div className="mb-2 flex flex-col ">
         <label htmlFor="nameInput">
             UserName:
         </label>
@@ -112,7 +137,7 @@ return(
 
         />
 
-        
+        </div>
 
     <div >
             <div >
@@ -123,20 +148,27 @@ return(
                 >
 
                     <option value="" disabled>choose your role</option>
-                    <option value="farmer">Farmer</option>
                     <option value="customer">Customer</option>
-                    <option value="seedsupplier">SeedSupplier</option>
+                    <option value="seedSupplier">SeedSupplier</option>
                 </select>
-                {role && <p>Selected: {role}</p>}
             </div>
         
 
     </div>
-    <button type="submit" className="px-5 py-2 bg-blue-500 text-white rounded-lg">
-            SignUp
-        </button>
-    </form>
 
+    <div>
+        {role==="seedSupplier" &&
+            <><p>
+                Please Choose the crop you will suppliy!
+            </p>
+            <CropsOverviewTable crops={crops} selectedCrop={setSelectedCrop} /></>
+        }
+    </div>
+    <button type="submit" className="px-5 py-2 bg-blue-500 text-black rounded-lg">
+            SignUp
+    </button>
+    </form>
+    </div>
     </>
 )
 
