@@ -2,13 +2,14 @@
 
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react";
-import {Crop, Role} from '@types';
+import {Crop, Role, StatusMessage} from '@types';
 import CustomerService from "@/service/CustomerService";
 import UserService from "@/service/UserService";
 import React from "react";
 import classNames from "classnames";
 import CropsOverviewTable from "../crops/CropsOverviewTable";
 import CropService from "@/service/CropService";
+import { stat } from "node:fs";
 
 const UserSignup : React.FC = ()=>{
 const router=useRouter();
@@ -17,10 +18,14 @@ const [role,setRole]=useState<string>("");
 const [selectedOption,setselectedOption]=useState("");
 const [email,setEmail]=useState<string>("")
 const [address,setAddress]=useState<string>("")
-const [cropPreference,setcropPreference]=useState<Crop[]>([])
 const [password,setPassword]=useState<string>("");
 const [crops, setCrops] = useState<Crop[]>([]); 
-
+const [nameError, setNameError] = useState("");
+const [passwordError, setPasswordError] = useState("");
+const [roleError, setRoleError] = useState("");
+const [emailError, setEmailError] = useState("");
+const[addressError,setAddressError]=useState("")
+const[statusMessage,setStatusMessage]=useState<StatusMessage[]>()
 
 const defaultCrop= {
     "name":"Sorghum",
@@ -63,38 +68,52 @@ const [selectedCrop,setSelectedCrop]=useState<Crop>(defaultCrop);
   const validate = () => {
     let result = true;
     if (!name || name?.trim() === "") {
+      setNameError("Name is required");
       result = false;
-      console.log("nameerror");
       // }else if (!selectedOption||selectedOption?.trim()===""){
       //     result=false;
       //     console.log("roleerror")
-    } else if (!email || email?.trim() === "") {
-      result = false;
-      console.log("emailerror");
     } else if (!password || password?.trim() === "") {
+      setPasswordError("Password is required");
       result = false;
-      console.log("passworderror");
+    }else if (!address || address?.trim() === "") {
+      setAddressError("address is required");
+      result = false;
+    }else if (!email || email?.trim() === "") {
+      setEmailError("Email is required");
+      result = false;
+    } else if(role===""){
+      setRoleError("Please select your Role!")
+      result=false;
     }
 
     return result;
   };
+  const removeErrors = () => {
+    setNameError("");
+    setPasswordError("");
+    setRoleError("");
+    setStatusMessage([]);
+  };
+
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
+    removeErrors();
     if (!validate()) {
-      console.log("exiting");
       return;
     }
-
+    setStatusMessage([
+      {
+        message: "Signup successful!",
+        type: "success",
+      },
+    ]);
+statusMessage
+    setTimeout(() => {
+      router.push("/");
+    }, 1000);
     sessionStorage.setItem("newUser", name);
-
-    // sessionStorage.setItem("userRole",selectedOption);
-    // if(!sessionStorage.getItem(selectedOption)){
-    //     setRole("customer")
-    // }else if(sessionStorage.getItem(selectedOption)){
-    //     setRole(selectedOption)
-    // }
 
    const response= await UserService.addUsers(name,password,email,address, role||"customer",selectedCrop);
    console.log(response)
@@ -125,6 +144,7 @@ return response;
         <input type="text" value={name} onChange={(event)=>setName(event.target.value)}
             className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue:500 block w-full p-2.5"
             />
+          {nameError && <p className="text-danger">{nameError}</p>}
 
         <label htmlFor="password">
             Password:
@@ -132,22 +152,25 @@ return response;
         <input type="password" value={password} onChange={(event)=>setPassword(event.target.value)} 
         className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue:500 block w-full p-2.5"
         />
+          {passwordError && <p className="text-danger">{passwordError}</p>}
 
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="Address">Address:</label>
         <input
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
+          type="address"
+          value={address}
+          onChange={(event) => setAddress(event.target.value)}
           className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue:500 block w-full p-2.5"
         />
+          {addressError && <p className="text-danger">{addressError}</p>}
 
-        <label htmlFor="password">Email:</label>
+        <label htmlFor="email">Email:</label>
         <input
           type="text"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue:500 block w-full "
         />
+          {emailError && <p className="text-danger">{emailError}</p>}
 
         </div>
 
@@ -167,7 +190,9 @@ return response;
         
 
     </div>
-
+        {roleError &&
+        <p className="text-danger">{roleError}</p>
+        }
     <div>
         {role==="seedSupplier" &&
             <><p>
@@ -179,6 +204,7 @@ return response;
     <button type="submit" className="px-5 py-2 bg-blue-500 text-black rounded-lg">
             SignUp
     </button>
+    {/* {statusMessage && Array.isArray(statusMessage) &&  <p className="text-green">{statusMessage[0]}</p>} */}
     </form>
     </div>
     </>

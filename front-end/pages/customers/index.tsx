@@ -6,20 +6,26 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import CropsOverviewTable from "@/components/crops/CropsOverviewTable";
 import Crops from "../crops";
+import useSWR, { mutate } from "swr";
+import useInterval from "use-interval";
 
 const Customers:React.FC=() =>{
-    const[customers,setCustomers]=useState<Array<Customer>>();
+    // const[customers,setCustomers]=useState<Array<Customer>>();
     const[selectedCustomer,setSelectedCustomer]=useState <Customer|null>(null)
 
     const getCustomers=async()=>{
         const response=await CustomerService.getAllCustomers();
-        const customers=await response.json();
-        setCustomers(customers);
+        if(response.ok ){
+            const customers=await response.json();
+            return customers;
+        }
     }
 
-    useEffect(()=>{
-        getCustomers();
-    },[])
+    const {data, isLoading,error}=useSWR("getCustomers",getCustomers)
+
+    useInterval(()=>{
+        mutate("getCustomers")
+    },10000)
 
     const [selectedCrop, setSelectedCrop] = useState<Crop | null>(null);
 
@@ -34,8 +40,14 @@ const Customers:React.FC=() =>{
             <h1>Customers</h1>
             <section>
                 <h2>Customers Overview</h2>
-                {customers && (
-                    <CustomerTable customers={customers} selectCustomer={setSelectedCustomer}/>
+                {isLoading && (
+                    <p>Loading...</p>
+                )}
+                {error && (
+                    <div className="text-red-800">{error}</div>
+                )}
+                {data && (
+                    <CustomerTable customers={data} selectCustomer={setSelectedCustomer}/>
                 )}
             </section>
 
