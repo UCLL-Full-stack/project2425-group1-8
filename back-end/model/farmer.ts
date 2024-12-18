@@ -5,7 +5,7 @@ import { th } from 'date-fns/locale';
 export class Farmer{
     private id?: number;
     private readonly name:string;
-    // private readonly age:number;
+    private readonly password:string;
     private readonly email:string;
     private readonly farmingPractice:string;
     private readonly farmSizeInHectares:number;
@@ -14,28 +14,31 @@ export class Farmer{
     constructor (farmer:{
         id?: number;
         name:string;
-        // age:number;
+        password:string;
         email:string
         farmingPractice:string;
         farmSizeInHectares:number;
         role: string;
 
     }){
+        this.validate(farmer);
         this.id=farmer.id;
         this.name=farmer.name;
-        // this.age=farmer.age;
+        this.password=farmer.password;
         this.email=farmer.email;
         this.farmingPractice=farmer.farmingPractice;
         this.farmSizeInHectares=farmer.farmSizeInHectares;
         this.role = farmer.role;
 
-        this.validate(farmer);
       
     }
 
-    validate(farmer:{name:string;email:string;farmingPractice:string;farmSizeInHectares:number;role:string
+    validate(farmer:{name:string;password:string;email:string;farmingPractice:string;farmSizeInHectares:number;role:string
     }){
         if(!farmer.name){
+            throw new Error('name must be provided');
+        }
+        if(!farmer.password){
             throw new Error('name must be provided');
         }
         if(!validator.isEmail(farmer.email)){
@@ -52,9 +55,9 @@ export class Farmer{
     getName():string{
         return this.name;
     }
-    // getAge():number{
-    //     return this.age;
-    // }
+    getPassword():string{
+        return this.password;
+    }
     getEmail():string{
         return this.email;
     }
@@ -70,7 +73,8 @@ export class Farmer{
     
     static from({
         id,                      
-        name,                      
+        name,
+        password,                      
         email,                     
         farmingPractice,         
         farmSizeInHectares,
@@ -79,7 +83,8 @@ export class Farmer{
     }:FarmerPrisma ){
         return new Farmer({
             id,                      
-            name,                      
+            name, 
+            password,                     
             email,                     
             farmingPractice,         
             farmSizeInHectares,

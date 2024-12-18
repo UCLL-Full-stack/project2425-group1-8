@@ -1,4 +1,4 @@
-export type Role='farmer'|'customer'|'seedSupplier';
+// export type Role='farmer'|'customer'|'seedSupplier';
 
 export type Crop={
     id?:number;
@@ -17,7 +17,7 @@ export type Customer={
         address:string;
         email:string;
         cropPreference?:Crop[]; 
-        role:Role;  
+        role:string;  
 }
 
 export type SeedSupplier={
@@ -27,7 +27,18 @@ export type SeedSupplier={
     address:string;
     email:string;
     seedType:Crop;
-    role:Role;
+    role:string;
+};
+
+export type Farmer={
+    id?:number;
+    name:string;
+    password:string;
+    age:number;
+    email:string
+    farmingPractice:string;
+    farmSizeInHectares:number;
+    role:string;
 };
 
 

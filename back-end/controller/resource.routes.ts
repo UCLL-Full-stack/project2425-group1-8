@@ -33,6 +33,8 @@ const resourceRouter = express.Router();
  * @swagger
  * /resources:
  *   get:
+ *     security:
+ *       - bearerAuth: []
  *     summary: Get a list of all resources.
  *     responses:
  *      200:
