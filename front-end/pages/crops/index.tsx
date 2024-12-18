@@ -5,18 +5,23 @@ import CropService from "@/service/CropService";
 import { Crop } from "@/types";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
+import useSWR, { mutate } from "swr";
+import useInterval from "use-interval";
 
 const Crops: React.FC = () => {
-  const [crops, setCrops] = useState<Array<Crop>>([]);
+  // const [crops, setCrops] = useState<Array<Crop>>([]);
   const [selectedCrop, setSelectedCrop] = useState<Crop | null>(null);
   const getCrops = async () => {
     const response = await CropService.getAllCrops();
-    const cropsData = await response.json();
-    setCrops(cropsData);
+    if(response.ok){
+      const cropsData = await response.json();
+      return cropsData;
+    }
+    
   };
-  useEffect(() => {
-    getCrops();
-  }, []);
+
+  const {data, isLoading, error} =useSWR("getCrops", getCrops);
+ useInterval(()=>{ mutate ("getCrops") }, 10000)
   return (
     <>
       <Head>
@@ -27,8 +32,10 @@ const Crops: React.FC = () => {
       <main className="d-flex flex-column justify-content-center align-items-center">
         <h1>CROPS</h1>
         <section>
-          {crops && (
-            <CropsOverviewTable crops={crops} selectedCrop={setSelectedCrop} />
+          {error && <div className="text-red-800">{error}</div>}
+          {isLoading && <p>Loading...</p>}
+          {data && (
+            <CropsOverviewTable crops={data} selectedCrop={setSelectedCrop} />
           )}
           <h2>Crops Overview</h2>
         </section>
