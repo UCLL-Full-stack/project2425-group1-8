@@ -24,7 +24,7 @@ const CustomerDetail:React.FC<props> =({ customer }: props)=>{
                 </tr>
                 <tr>
                     <td>Number of Crop Preference:</td>
-                    <td>{customer.cropPreference.length}</td>
+                    <td>{customer.cropPreference?.length}</td>
                 </tr>
             </table>
           )}

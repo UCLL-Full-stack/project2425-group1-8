@@ -1,0 +1,31 @@
+{
+    "app.title":"Crop App",
+    "general.error":"An error has occured please try again later.",
+    "header":{
+        "app.title":"Crop App",
+        "nav" :{
+            "Home":"Home",
+            "Crops":"Crops",
+            "Customers":"Customers",
+            "Seed Suppliers":"Seed Suppliers",
+            "Login":"Login"
+
+        }
+    },
+    "Crops":{
+        "title":"Crops",
+        "cropsname":"Crops Name",
+        "cropsdetailstitle":"Crop Details",
+        "cropdetails":{
+            "ID":"ID",
+            "Name":"Name:",
+            "PurchasePrice":"PurchasePrice:",
+            "MarketPrice":"MarketPrice:",
+            "TotalYield":"TotalYield:",
+            "Attention Range":"Attention Range",
+            "GrowthDurationInMonths":"Growth DurationInMonths:"
+
+        }
+
+    }
+}

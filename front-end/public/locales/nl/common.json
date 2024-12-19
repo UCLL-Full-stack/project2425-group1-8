@@ -1,0 +1,29 @@
+{
+    "app.title": "Crop App",
+    "general.error": "Er is een fout opgetreden, probeer het later opnieuw.",
+    "header": {
+        "app.title": "Crop App",
+        "nav": {
+            "Home": "Home",
+            "Crops": "Gewassen",
+            "Customers": "Klanten",
+            "Seed Suppliers": "Zaadleveranciers",
+            "Login": "Inloggen"
+        }
+    },
+    "Crops": {
+        "title": "Gewassen",
+        "cropsname": "Naam van de gewassen",
+        "cropsdetailstitle": "Details van het gewas",
+        "cropdetails": {
+            "ID": "ID",
+            "Name": "Naam:",
+            "PurchasePrice": "Aankoopprijs:",
+            "MarketPrice": "Marktprijs:",
+            "TotalYield": "Totale Opbrengst:",
+            "AttentionRange": "Aandachtsbereik",
+            "GrowthDurationInMonths": "Groeiduur in maanden:"
+            }
+        }
+    
+}

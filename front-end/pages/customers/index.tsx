@@ -8,6 +8,7 @@ import CropsOverviewTable from "@/components/crops/CropsOverviewTable";
 import Crops from "../crops";
 import useSWR, { mutate } from "swr";
 import useInterval from "use-interval";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Customers:React.FC=() =>{
     // const[customers,setCustomers]=useState<Array<Customer>>();
@@ -65,6 +66,14 @@ const Customers:React.FC=() =>{
         </main>
         </>
     );
+};
+export const getServerSideProps  = async (context: { locale: any; }) => {
+  const { locale }= context;
+  return {
+    props:{
+      ...(await serverSideTranslations(locale ?? "en", ["common"])),
+    },
+  };
 };
 
 export default Customers;

@@ -2,9 +2,14 @@ import Head from "next/head";
 import styles from "@styles/Home.module.css";
 import Image from "next/image";
 import Header from "@/components/header";
-import home from "../images/home.jpg";
+// import   serverSideTranslations  from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
+import home from "../images/home.jpg";
+import { useTranslation } from "next-i18next";
+import { GetServerSideProps } from 'next';
 const Home: React.FC = () => {
+  const { t } = useTranslation()
   return (
     <>
       <Head>
@@ -30,6 +35,15 @@ const Home: React.FC = () => {
       </main>
     </>
   );
+};
+
+export const getServerSideProps  = async (context: { locale: any; }) => {
+  const { locale }= context;
+  return {
+    props:{
+      ...(await serverSideTranslations(locale ?? "en", ["common"])),
+    },
+  };
 };
 
 export default Home;

@@ -16,7 +16,7 @@ const CropsOverviewTable: React.FC<Props> = ({
           <thead>
             <tr>
               <th scope="col">
-                <h2>Crops Name</h2>{" "}
+                {/* <h2>Crops Name</h2>{" "} */}
               </th>
               {/* <th scope="col">purchasePrice</th>
               <th scope="col">marketPrice</th>

@@ -2,6 +2,7 @@ import Header from "@/components/header";
 import SeedSuppliersOverView from "@/components/SeedSuppliers/SeedSuppliersOverView";
 import SeedSupplierService from "@/service/SeedSupplier";
 import { SeedSupplier } from "@/types";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import useSWR, { mutate } from "swr";
@@ -51,6 +52,14 @@ const SeedSuppliers = () => {
       </main>
     </>
   );
+};
+export const getServerSideProps  = async (context: { locale: any; }) => {
+  const { locale }= context;
+  return {
+    props:{
+      ...(await serverSideTranslations(locale ?? "en", ["common"])),
+    },
+  };
 };
 
 export default SeedSuppliers;

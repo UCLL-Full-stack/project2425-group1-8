@@ -3,12 +3,16 @@ import CropsOverviewTable from "@/components/crops/CropsOverviewTable";
 import Header from "@/components/header";
 import CropService from "@/service/CropService";
 import { Crop } from "@/types";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "next-i18next";
 import useSWR, { mutate } from "swr";
 import useInterval from "use-interval";
 
 const Crops: React.FC = () => {
+    const { t,i18n } = useTranslation()
+  
   // const [crops, setCrops] = useState<Array<Crop>>([]);
   const [selectedCrop, setSelectedCrop] = useState<Crop | null>(null);
   const getCrops = async () => {
@@ -25,23 +29,23 @@ const Crops: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Crops</title>
+        <title>CROPS</title>
       </Head>
       <Header />
 
       <main className="d-flex flex-column justify-content-center align-items-center">
-        <h1>CROPS</h1>
+        <h1>{t('Crops.title')}</h1>
         <section>
           {error && <div className="text-red-800">{error}</div>}
           {isLoading && <p>Loading...</p>}
           {data && (
             <CropsOverviewTable crops={data} selectedCrop={setSelectedCrop} />
           )}
-          <h2>Crops Overview</h2>
         </section>
         {selectedCrop && (
           <section className="mt-5">
-            <h2>Crop Details</h2>
+            <h2>{t('Crops.cropsdetailstitle')}</h2>
+            {/* <h3>{t('Crops.cropsname')}</h3> */}
             <CropDetails crop={selectedCrop} />
             {/* {selectedCrop.purchasePrice&&(
                 <CropsOverviewTable crops= {selectedCrop}/>
@@ -51,6 +55,14 @@ const Crops: React.FC = () => {
       </main>
     </>
   );
+};
+export const getServerSideProps  = async (context: { locale: any; }) => {
+  const { locale }= context;
+  return {
+    props:{
+      ...(await serverSideTranslations(locale ?? "en", ["common"])),
+    },
+  };
 };
 
 export default Crops;
