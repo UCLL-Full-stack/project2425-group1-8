@@ -2,8 +2,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import avatar from "../images/avatar.png";
+import { useTranslation } from "next-i18next";
+import Language from "./language/Language";
 
 const Header: React.FC = () => {
+  const { t } = useTranslation();
   const [loggedInUser, setLoggedInUser] = useState<String | null>(null);
 
   useEffect(() => {
@@ -11,7 +14,7 @@ const Header: React.FC = () => {
   }, []);
 
   const handleLogout = () => {
-    sessionStorage.removeItem("loggedInUser");
+    // sessionStorage.removeItem("loggedInUser");
     localStorage.removeItem("loggedInUser");
     setLoggedInUser(null);
   };
@@ -19,35 +22,35 @@ const Header: React.FC = () => {
   return (
     <header className="p-4 mb-1 border-bottom bg-success bg-gradient shadow-sm">
       <a className="fs-2 d-flex mb-2 mb-lg-0 text-white text-decoration-none">
-        Crop App
+        {t("app.title")}
       </a>
       <nav className="nav justify-content-end gap-15">
         <Link
           href="/"
           className="nav-link text-light fs-5 fw-semibold px-3 py-2 rounded hover-bg-light"
         >
-          Home
+          {t("header.nav.home")}
         </Link>
 
         <Link
           href="/crops"
           className="nav-link text-light fs-5 fw-semibold px-3 py-2 rounded hover-bg-light"
         >
-          Crops
+          {t("header.nav.crops")}
         </Link>
 
         <Link
           href="/customers"
           className="nav-link text-light fs-5 fw-semibold px-3 py-2 rounded hover-bg-light"
         >
-          Customers
+          {t("header.nav.customers")}
         </Link>
 
         <Link
           href="/seedSuppliers"
           className="nav-link text-light fs-5 fw-semibold px-3 py-2 rounded hover-bg-light"
         >
-          Seed Suppliers
+          {t("header.nav.seedSuppliers")}
         </Link>
 
         {!loggedInUser ? (
@@ -55,7 +58,7 @@ const Header: React.FC = () => {
             href="/login"
             className="nav-link text-light fs-5 fw-semibold px-3 py-2 rounded hover-bg-light"
           >
-            Login
+            {t("header.nav.login")}
           </Link>
         ) : (
           <div style={{ cursor: "pointer" }} onClick={handleLogout}>
@@ -68,6 +71,7 @@ const Header: React.FC = () => {
             />
           </div>
         )}
+        <Language />
       </nav>
     </header>
   );

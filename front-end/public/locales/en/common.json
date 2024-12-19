@@ -1,0 +1,31 @@
+{
+    "app.title": "Crop App",
+    "general.error": "An error has occurred. Please try again later.",
+    "header": {
+      "welcome": "Welcome",
+      "nav": {
+        "home": "Home",
+        "crops": "crops",
+        "customers": "customers",
+        "seedSuppliers":"seedSuppliers",
+        "login": "Login",
+        "logout": "Logout"
+      }
+    },
+    "login": {
+      "title": "Login",
+      "button": "Login",
+      "success": "Login successful. Redirecting to homepage...",
+      "validate": {
+        "name": "Name is required",
+        "password": "Password is required",
+        "role":"Role is required"
+      },
+      "label": {
+        "username": "Username:",
+        "password": "Password:",
+        "role":"role"
+      }
+    }
+  }
+  

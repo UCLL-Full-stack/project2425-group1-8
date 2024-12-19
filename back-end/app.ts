@@ -11,8 +11,10 @@ import { cropRouter } from './controller/crop.routes';
 import { farmerRouter } from './controller/farmer.routes';
 import { userRouter } from './controller/user.routes';
 import { expressjwt } from 'express-jwt';
+import helmet from 'helmet';
 
 const app = express();
+app.use(helmet())
 dotenv.config();
 const port = process.env.APP_PORT || 3000;
 

@@ -1,0 +1,30 @@
+{
+  "app.title": "Gewassen App",
+  "general.error": "Er is een fout opgetreden. Probeer het later opnieuw.",
+  "header": {
+    "welcome": "Welkom",
+    "nav": {
+      "home": "Home",
+      "crops": "Gewassen",
+      "customers": "Klanten",
+      "seedSuppliers":"zaadleveranciers",
+      "login": "Inloggen",
+      "logout": "Uitloggen"
+    }
+  },
+  "login": {
+    "title": "Inloggen",
+    "button": "Inloggen",
+    "success": "Inloggen succesvol. Doorverwijzen naar de homepage...",
+    "validate": {
+      "name": "Naam is verplicht",
+      "password": "Wachtwoord is verplicht",
+      "role": "Rol is verplicht"
+    },
+    "label": {
+      "username": "Gebruikersnaam:",
+      "password": "Wachtwoord:",
+      "role": "Rol:"
+    }
+  }
+}

@@ -25,7 +25,7 @@ const addUsers= async (name:string,password:string,email:string ,address:string 
         return response?.json()
         }else{
             console.log(role)
-            return "Idiot choose your role properly"
+            return "choose your role properly"
         }       
 }
 

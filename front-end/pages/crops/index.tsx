@@ -3,6 +3,7 @@ import CropsOverviewTable from "@/components/crops/CropsOverviewTable";
 import Header from "@/components/header";
 import CropService from "@/service/CropService";
 import { Crop } from "@/types";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import useSWR, { mutate } from "swr";
@@ -13,15 +14,16 @@ const Crops: React.FC = () => {
   const [selectedCrop, setSelectedCrop] = useState<Crop | null>(null);
   const getCrops = async () => {
     const response = await CropService.getAllCrops();
-    if(response.ok){
+    if (response.ok) {
       const cropsData = await response.json();
       return cropsData;
     }
-    
   };
 
-  const {data, isLoading, error} =useSWR("getCrops", getCrops);
- useInterval(()=>{ mutate ("getCrops") }, 10000)
+  const { data, isLoading, error } = useSWR("getCrops", getCrops);
+  useInterval(() => {
+    mutate("getCrops");
+  }, 10000);
   return (
     <>
       <Head>
@@ -51,6 +53,20 @@ const Crops: React.FC = () => {
       </main>
     </>
   );
+};
+
+export const getServersideProps = async (context: any) => {
+  try {
+    const { locale } = context;
+
+    return {
+      props: {
+        ...(await serverSideTranslations(locale ?? "en", ["common"])),
+      },
+    };
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export default Crops;

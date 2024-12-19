@@ -3,6 +3,7 @@ import styles from "@styles/Home.module.css";
 import Image from "next/image";
 import Header from "@/components/header";
 import home from "../images/home.jpg";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Home: React.FC = () => {
   return (
@@ -31,5 +32,15 @@ const Home: React.FC = () => {
     </>
   );
 };
+
+// export const getServersideProps = async (context: any) => {
+//   const { locale } = context;
+
+//   return {
+//     props: {
+//       ...(await serverSideTranslations(locale ?? "en", ["common"])),
+//     },
+//   };
+// };
 
 export default Home;

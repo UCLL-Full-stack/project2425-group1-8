@@ -21,12 +21,21 @@
       "@/*": [
         "./*"
       ],
-      "@styles/*": ["styles/*"],
-      "@types": ["types/index.ts"],
-      "@components/*": ["components/*"],
-      "@services/*": ["services/*"]
+      "@styles/*": [
+        "styles/*"
+      ],
+      "@types": [
+        "types/index.ts"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@services/*": [
+        "services/*"
+      ]
     },
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "target": "ES2017"
   },
   "include": [
     "next-env.d.ts",

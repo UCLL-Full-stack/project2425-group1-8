@@ -1,4 +1,4 @@
-import { Crop, Customer, Role } from "@/types";
+import { Crop, Customer } from "@/types";
 
 const getAllCustomers=()=>{
     return fetch(process.env.NEXT_PUBLIC_API_URL +"/customers",{

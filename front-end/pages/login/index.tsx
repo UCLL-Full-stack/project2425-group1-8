@@ -2,6 +2,7 @@ import Header from "@/components/header";
 import UserLoginForm from "@/components/users/UserLoginForm";
 import Head from "next/head";
 import React from "react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Login = () => {
   return (
@@ -18,5 +19,15 @@ const Login = () => {
     </>
   );
 };
+
+// export const getServersideProps = async (context: any) => {
+//   const { locale } = context;
+
+//   return {
+//     props: {
+//       ...(await serverSideTranslations(locale ?? "en", ["common"])),
+//     },
+//   };
+// };
 
 export default Login;
