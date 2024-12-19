@@ -6,7 +6,6 @@ import Language from "./Language";
 import { useTranslation } from "next-i18next";
 
 const Header: React.FC = () => {
-  const { t } = useTranslation();
   const [loggedInUser, setLoggedInUser] = useState<String | null>(null);
   const { t, i18n } = useTranslation();
   console.log(i18n.language);
