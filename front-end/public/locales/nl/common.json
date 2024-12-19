@@ -1,30 +1,29 @@
 {
-  "app.title": "Gewassen App",
-  "general.error": "Er is een fout opgetreden. Probeer het later opnieuw.",
-  "header": {
-    "welcome": "Welkom",
-    "nav": {
-      "home": "Home",
-      "crops": "Gewassen",
-      "customers": "Klanten",
-      "seedSuppliers":"zaadleveranciers",
-      "login": "Inloggen",
-      "logout": "Uitloggen"
-    }
-  },
-  "login": {
-    "title": "Inloggen",
-    "button": "Inloggen",
-    "success": "Inloggen succesvol. Doorverwijzen naar de homepage...",
-    "validate": {
-      "name": "Naam is verplicht",
-      "password": "Wachtwoord is verplicht",
-      "role": "Rol is verplicht"
+    "app.title": "Crop App",
+    "general.error": "Er is een fout opgetreden, probeer het later opnieuw.",
+    "header": {
+        "app.title": "Crop App",
+        "nav": {
+            "Home": "Home",
+            "Crops": "Gewassen",
+            "Customers": "Klanten",
+            "Seed Suppliers": "Zaadleveranciers",
+            "Login": "Inloggen"
+        }
     },
-    "label": {
-      "username": "Gebruikersnaam:",
-      "password": "Wachtwoord:",
-      "role": "Rol:"
-    }
-  }
+    "Crops": {
+        "title": "Gewassen",
+        "cropsname": "Naam van de gewassen",
+        "cropsdetailstitle": "Details van het gewas",
+        "cropdetails": {
+            "ID": "ID",
+            "Name": "Naam:",
+            "PurchasePrice": "Aankoopprijs:",
+            "MarketPrice": "Marktprijs:",
+            "TotalYield": "Totale Opbrengst:",
+            "AttentionRange": "Aandachtsbereik",
+            "GrowthDurationInMonths": "Groeiduur in maanden:"
+            }
+        }
+    
 }

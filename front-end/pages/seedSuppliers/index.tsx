@@ -50,6 +50,14 @@ const SeedSuppliers = () => {
     </>
   );
 };
+export const getServerSideProps  = async (context: { locale: any; }) => {
+  const { locale }= context;
+  return {
+    props:{
+      ...(await serverSideTranslations(locale ?? "en", ["common"])),
+    },
+  };
+};
 
 // export const getServersideProps = async (context: any) => {
 //   const { locale } = context;

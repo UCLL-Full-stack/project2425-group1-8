@@ -1,14 +1,16 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import Image from "next/image";
 import avatar from "../images/avatar.png";
+import Language from "./Language";
 import { useTranslation } from "next-i18next";
-import Language from "./language/Language";
 
 const Header: React.FC = () => {
   const { t } = useTranslation();
   const [loggedInUser, setLoggedInUser] = useState<String | null>(null);
-
+  const { t, i18n } = useTranslation();
+  console.log(i18n.language);
+  console.log("reading");
   useEffect(() => {
     setLoggedInUser(sessionStorage.getItem("loggedInUser"));
   }, []);
@@ -22,43 +24,48 @@ const Header: React.FC = () => {
   return (
     <header className="p-4 mb-1 border-bottom bg-success bg-gradient shadow-sm">
       <a className="fs-2 d-flex mb-2 mb-lg-0 text-white text-decoration-none">
-        {t("app.title")}
+        {/* Crop App */}
+        {t("header.app.title")}
       </a>
       <nav className="nav justify-content-end gap-15">
         <Link
           href="/"
           className="nav-link text-light fs-5 fw-semibold px-3 py-2 rounded hover-bg-light"
         >
-          {t("header.nav.home")}
+          {/* Home */}
+          {t("header.nav.Home")}
         </Link>
 
         <Link
           href="/crops"
           className="nav-link text-light fs-5 fw-semibold px-3 py-2 rounded hover-bg-light"
         >
-          {t("header.nav.crops")}
+          {/* Crops */}
+          {t("header.nav.Crops")}
         </Link>
 
         <Link
           href="/customers"
           className="nav-link text-light fs-5 fw-semibold px-3 py-2 rounded hover-bg-light"
         >
-          {t("header.nav.customers")}
+          {/* Customers */}
+          {t("header.nav.Customers")}
         </Link>
 
         <Link
           href="/seedSuppliers"
           className="nav-link text-light fs-5 fw-semibold px-3 py-2 rounded hover-bg-light"
         >
-          {t("header.nav.seedSuppliers")}
+          {/* Seed Suppliers */}
+          {t("header.nav.Seed Suppliers")}
         </Link>
-
         {!loggedInUser ? (
           <Link
             href="/login"
             className="nav-link text-light fs-5 fw-semibold px-3 py-2 rounded hover-bg-light"
           >
-            {t("header.nav.login")}
+            {/* Login */}
+            {t("header.nav.Login")}
           </Link>
         ) : (
           <div style={{ cursor: "pointer" }} onClick={handleLogout}>
