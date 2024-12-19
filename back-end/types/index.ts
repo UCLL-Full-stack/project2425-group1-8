@@ -21,6 +21,7 @@ type CropInput={
 type FarmerInput={
         id?:number;
         name:string;
+        password:string;
         age:number;
         email:string
         farmingPractice:string;

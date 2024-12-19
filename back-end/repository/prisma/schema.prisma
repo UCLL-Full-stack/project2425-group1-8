@@ -46,7 +46,7 @@ model Farmer {
 model SeedSupplier{
     id                          Int     @id @default(autoincrement())
     cropId                      Int
-    seedType                    Crop    @relation(fields: [cropId], references: [id])
+    seedType                    Crop    @relation(fields: [cropId], references: [id], onDelete: Cascade)
      role                       String
       name                       String    @unique
   email                          String    @unique

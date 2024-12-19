@@ -36,6 +36,9 @@ export class SeedSupplier{
     getName():string{
         return this.name;
     }
+    getPassword():string{
+        return this.password;
+    }
 
     getAddress():string{
         return this.address;
@@ -47,6 +50,9 @@ export class SeedSupplier{
 
     getSeedType():Crop{
         return this.seedType;
+    }
+    getRole():string{
+        return this.role
     }
     validate(seedSupplier:{name:string; password:string;address:string;email:string;seedType:Crop,role:string}){
         if(!seedSupplier.name ){
