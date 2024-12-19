@@ -35,7 +35,7 @@ const loginUser=({name,password,role}:{ name: string; password: string; role: st
     //     throw new Error("loggedInUser not found in sessionStorage.");
     // }
     // const token = JSON.parse(loggedInUser).token;
-    const token=JSON.parse(sessionStorage.getItem("loggedInUser")|| "{}")?.token;
+    const token=JSON.parse(localStorage.getItem("loggedInUser")|| "{}")?.token;
     return fetch(process.env.NEXT_PUBLIC_API_URL+"/login",{
         method:"POST",
         headers:{

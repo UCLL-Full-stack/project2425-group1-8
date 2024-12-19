@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import avatar from "../images/avatar.png";
 import Language from "./Language";

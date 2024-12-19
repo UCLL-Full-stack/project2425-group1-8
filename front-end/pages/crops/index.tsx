@@ -3,12 +3,13 @@ import CropsOverviewTable from "@/components/crops/CropsOverviewTable";
 import Header from "@/components/header";
 import CropService from "@/service/CropService";
 import { Crop } from "@/types";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+// import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 import useSWR, { mutate } from "swr";
 import useInterval from "use-interval";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Crops: React.FC = () => {
     const { t,i18n } = useTranslation()
@@ -66,18 +67,6 @@ export const getServerSideProps  = async (context: { locale: any; }) => {
   };
 };
 
-export const getServersideProps = async (context: any) => {
-  try {
-    const { locale } = context;
 
-    return {
-      props: {
-        ...(await serverSideTranslations(locale ?? "en", ["common"])),
-      },
-    };
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 export default Crops;

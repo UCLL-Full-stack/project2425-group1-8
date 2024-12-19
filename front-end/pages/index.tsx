@@ -3,11 +3,11 @@ import styles from "@styles/Home.module.css";
 import Image from "next/image";
 import Header from "@/components/header";
 // import   serverSideTranslations  from 'next-i18next';
+// import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import home from "../images/home.jpg";
 import { useTranslation } from "next-i18next";
-import { GetServerSideProps } from "next";
 const Home: React.FC = () => {
   const { t } = useTranslation();
   return (
@@ -27,8 +27,8 @@ const Home: React.FC = () => {
           <Image
             src={home}
             alt="Agriculture Field"
-            width={1500}
-            height={600}
+            width={1255}
+            height={500}
             className="rounded shadow-sm"
           />
         </div>
