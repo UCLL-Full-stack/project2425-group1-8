@@ -4,15 +4,21 @@ import farmerService from "../../service/farmer.service";
 
 const farmer = new Farmer({
     name: "Yusuf Doe",
+    password:"yusuf123",
     email: "yusufdoe@gmail.com",
     farmingPractice: "agroforestry",
     farmSizeInHectares: 200,
+    role:"farmer"
 });
 
-let mockfarmerDbGetFarmer: jest.SpyInstance<Promise<Farmer>, [string], any>;
-
+// let mockfarmerDbGetFarmer: jest.SpyInstance<Promise<Farmer>, [string], any>;
+// let mockfarmerDbGetFarmer:jest.Mock;
+const  mockfarmerDbGetFarmer=jest.fn();
 beforeEach(() => {
-    mockfarmerDbGetFarmer = jest.spyOn(farmerDb, "getFarmer");
+    // mockfarmerDbGetFarmer = jest.spyOn(farmerDb, "getFarmer");
+    // mockfarmerDbGetFarmer=jest.fn();
+    farmerDb.getFarmer=mockfarmerDbGetFarmer;
+    mockfarmerDbGetFarmer.mockResolvedValue(farmer)
 });
 
 afterEach(() => {

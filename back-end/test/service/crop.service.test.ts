@@ -18,10 +18,12 @@ const crops=[
             growthDurationInMonths:9}),
 ]
 
-let mockcropDbGetAllCrops:jest.SpyInstance<Promise<Crop[]>,[],any>;
-
+// let mockcropDbGetAllCrops:jest.SpyInstance<Promise<Crop[]>,[],any>;
+const mockCrops=jest.fn();
 beforeEach(()=>{
-    mockcropDbGetAllCrops=jest.spyOn(cropDb,'getAllCrops');
+    // mockcropDbGetAllCrops=jest.spyOn(cropDb,'getAllCrops');
+    cropDb.getAllCrops=mockCrops;
+    mockCrops.mockResolvedValue(crops)
 });
 
 afterEach(()=>{
@@ -29,12 +31,12 @@ afterEach(()=>{
 });
 test('given valid crops , when:getting all crops, then:all crops are returned',async ()=>{
     //given
-    mockcropDbGetAllCrops.mockResolvedValue(crops);
+    mockCrops.mockResolvedValue(crops);
 
     //when
     const allCrops=await cropService.getAllCrops();
 
     //then
-    expect(mockcropDbGetAllCrops).toHaveBeenCalledTimes(1);
+    expect(mockCrops).toHaveBeenCalledTimes(1);
     expect(allCrops).toEqual(crops);
 })

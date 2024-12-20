@@ -37,10 +37,14 @@ const seedSupliers:SeedSupplier[]= [
     })
 ];
 
-let mockSeedSupplierDbGetAllSeedSuppliers:jest.SpyInstance<Promise<SeedSupplier[]>,[],any >;
+// let mockSeedSupplierDbGetAllSeedSuppliers:jest.SpyInstance<Promise<SeedSupplier[]>,[],any >;
+// let mockSeedSuppliers:jest.Mock;
+const    mockSeedSuppliers=jest.fn()
 
 beforeEach(()=>{
-    mockSeedSupplierDbGetAllSeedSuppliers=jest.spyOn(seedSupplierDb,'getAllseedSuppliers');
+   seedSupplierDb.getAllseedSuppliers=mockSeedSuppliers;
+   mockSeedSuppliers.mockResolvedValue(seedSupliers)
+    // mockSeedSupplierDbGetAllSeedSuppliers=jest.spyOn(seedSupplierDb,'getAllseedSuppliers');
 });
 
 afterEach(()=>{
@@ -49,11 +53,11 @@ afterEach(()=>{
 
 test('given valid SeedSupplier fields, when getting SeedSuppliers,then all SeedSuppliers are returned',async()=>{
     //given
-    mockSeedSupplierDbGetAllSeedSuppliers.mockResolvedValue(seedSupliers);
+    mockSeedSuppliers.mockResolvedValue(seedSupliers);
     //when
     const returnedSeedSuppliers=await seedSupplierService.getAllseedSuppliers();
     //then
-    expect(mockSeedSupplierDbGetAllSeedSuppliers).toHaveBeenCalledTimes(1);
+    expect(mockSeedSuppliers).toHaveBeenCalledTimes(1);
     expect(returnedSeedSuppliers).toEqual(seedSupliers);
 })
 

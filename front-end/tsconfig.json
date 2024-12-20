@@ -11,7 +11,7 @@
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -35,7 +35,7 @@
       ]
     },
     "forceConsistentCasingInFileNames": true,
-    "target": "ES2017"
+    "target": "ESNext"
   },
   "include": [
     "next-env.d.ts",

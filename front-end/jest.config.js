@@ -1,8 +1,12 @@
-/** @type {import('jest').Config} */
+/** @type {import('ts-jest').JestConfigWithTsJest} **/
 module.exports = {
   testEnvironment: "jsdom",
   transform: {
-    "^.+\\.tsx?$": "esbuild-jest"
-  }
+    "\\.[jt]sx?$": "esbuild-jest",
+  },
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/$1",
+  },
 
+ 
 };
