@@ -130,7 +130,7 @@ const userRouter=express.Router();
  */
 
 userRouter.post('/',
-    async (req: Request , res: Response, next: NextFunction) => {
+    async (req: Request , res: Response , next: NextFunction) => {
         try {
             const AuthenticationResponse=await userService.authenticate(req.body as CustomerInput | FarmerInput | SeedSupplierInput);
         res.status(200).json(AuthenticationResponse);

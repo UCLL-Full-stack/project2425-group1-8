@@ -15,6 +15,34 @@ const Login = () => {
         <section>
           <UserLoginForm />
         </section>
+        <div className="overflow-hidden">
+      <table className="table position-relative z-index-2 w-50 bg-white bg-opacity-75 mx-auto">
+        <thead>
+          <tr>
+            <th>User name</th>
+            <th>Password</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cammie</td>
+            <td>cammie123</td>
+            <td>customer</td>
+          </tr>
+          <tr>
+            <td>hana</td>
+            <td>hana123</td>
+            <td>Seed Supplier</td>
+          </tr>
+          <tr>
+            <td>Yusuf Doe</td>
+            <td>yusuf123</td>
+            <td>farmer</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
       </main>
     </>
   );

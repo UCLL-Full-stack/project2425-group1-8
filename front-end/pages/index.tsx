@@ -19,19 +19,20 @@ const Home: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className={styles.main}>
-        {/* <span>
-          <h1>Welcome!</h1>
-        </span> */}
-        <div className={styles.imageContainer}>
+      <main >
+      <div className={styles.imageContainer}>
           <Image
             src={home}
             alt="Agriculture Field"
             width={1255}
-            height={500}
+            height={535}
             className="rounded shadow-sm"
           />
         </div>
+        {/* <span>
+          <h1>Welcome!</h1>
+        </span> */}
+        
       </main>
     </>
   );

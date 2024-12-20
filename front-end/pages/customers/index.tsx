@@ -18,10 +18,8 @@ const Customers: React.FC = () => {
 
   const getCustomers = async () => {
     const response = await CustomerService.getAllCustomers();
-    if (response.ok) {
-      const customers = await response.json();
-      return customers;
-    }
+    return response;
+
   };
 
   const { data, isLoading, error } = useSWR("getCustomers", getCustomers);
@@ -31,7 +29,7 @@ const Customers: React.FC = () => {
   }, 10000);
 
   const [selectedCrop, setSelectedCrop] = useState<Crop | null>(null);
-
+  console.log(selectedCrop)
   return (
     <>
       <Head>
@@ -41,7 +39,7 @@ const Customers: React.FC = () => {
       <main className="d-flex flex-column justify-content-center align-items-center">
         <h1>Customers</h1>
         <section>
-          <h2>Customers Overview</h2>
+          {/* <h2>Customers Overview</h2> */}
           {isLoading && <p>Loading...</p>}
           {error && <div className="text-red-800">{error}</div>}
           {data && (

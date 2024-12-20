@@ -2,8 +2,9 @@ import React from "react";
 import { Crop } from "@types";
 
 type Props = {
-  crops: Array<Crop>;
-  selectedCrop: (crop: Crop) => void;
+  crops: Array<Crop>|undefined
+  ;
+  selectedCrop?: (crop: Crop) => void;
 };
 const CropsOverviewTable: React.FC<Props> = ({
   crops,
@@ -12,13 +13,13 @@ const CropsOverviewTable: React.FC<Props> = ({
   return (
     <>
       {crops && (
-        <table className="table table-hover">
+            <table className="table table-hover">
           <thead>
             <tr>
               <th scope="col">
-                {/* <h2>Crops Name</h2>{" "} */}
+                <h2>Crops Name</h2>{" "} 
               </th>
-              {/* <th scope="col">purchasePrice</th>
+              { /* <th scope="col">purchasePrice</th>
               <th scope="col">marketPrice</th>
               <th scope="col">totalYield</th>
               <th scope="col">attentionRange</th>
@@ -27,7 +28,7 @@ const CropsOverviewTable: React.FC<Props> = ({
           </thead>
           <tbody>
             {crops.map((crop, index) => (
-              <tr key={index} onClick={() => selectedCrop(crop)} role="button">
+              <tr key={index} onClick={() => selectedCrop && selectedCrop(crop)} role="button">
                 <td>{crop.name} </td>
                 {/* <td>{crop.purchasePrice} </td>
                 <td>{crop.marketPrice} </td>

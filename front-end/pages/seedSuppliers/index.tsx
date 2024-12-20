@@ -40,7 +40,7 @@ const SeedSuppliers = () => {
         <h2>Seed Suppliers Overview</h2>
         {isLoading && <p>Loading...</p>}
         {error && <div className="text-red-800">{error}</div>}
-        {data && (
+        {data &&(
           <SeedSuppliersOverView
             seedSuppliers={data}
             selectSeedSupplier={setSelectedSeedSupplier}

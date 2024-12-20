@@ -57,7 +57,7 @@ const UserLoginForm = () => {
         role: role,
       });
 
-      if (response.ok) {
+      if (response) {
         const user = await response.json();
 
         sessionStorage.setItem("loggedInUser", name);
