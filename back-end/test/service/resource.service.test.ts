@@ -16,11 +16,15 @@ const resources:Resource[]= [
         service_start_date:new Date(12/10/2024)
     }),
 ];
-
-let mockResourceDbGetAllResources:jest.SpyInstance<Resource[],[],any >;
+// let mockResourceDbGetAllResources:jest.Mock;
+// let mockResourceDbGetAllResources:jest.SpyInstance<Resource[],[],any >;
+const mockResourceDbGetAllResources=jest.fn();
 
 beforeEach(()=>{
-    mockResourceDbGetAllResources=jest.spyOn(resourceDb,'getAllResources');
+    // mockResourceDbGetAllResources=jest.spyOn(resourceDb,'getAllResources');
+    // mockResourceDbGetAllResources=jest.fn();
+    resourceDb.getAllResources=mockResourceDbGetAllResources;
+    mockResourceDbGetAllResources.mockResolvedValue(resources)
 });
 
 afterEach(()=>{

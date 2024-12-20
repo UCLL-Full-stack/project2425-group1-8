@@ -5,6 +5,7 @@ import { SeedSupplier } from "../../model/seedSuplier";
 const crop1=new Crop({name:"maize",purchasePrice:10,marketPrice:40,totalYield:200,attentionRange:3,growthDurationInMonths:15})
 
 const name="Alfaraj";
+const password="Alfaraj123"
 const address="Hassrode 14";
 const email="alfaraj123@gmail.com";
 const seedType=crop1;
@@ -13,6 +14,7 @@ test("given: Valid fields when: Creating seedSupplier then: A seedSuplier is cre
     const role='seedSupplier'
     const seedSuplier=new SeedSupplier({
         name,
+        password,
         address,
         email,
         seedType,

@@ -44,4 +44,37 @@ const addCrop=(crop:Crop):Crop=>{
     return crop;
 }
 
-export default {getAllCrops,findCropByName,getCropById,addCrop};
+const updateCrop=async(id:number,updatedCrop:Crop):Promise<Crop|null>=>{
+    try{
+        const updated=await database.crop.update({
+            where:{id},
+            data:{
+                name:updatedCrop.getName(),
+                purchasePrice: updatedCrop.getPurchasePrice(),
+                marketPrice: updatedCrop.getMarketPrice(),
+                totalYield: updatedCrop.getTotalYield(),
+                attentionRange: updatedCrop.getAttentionRange(),
+                growthDurationInMonths: updatedCrop.getgrowthDurationInMonths(),
+            }
+        })
+        return Crop.from(updated);
+    }catch(e){
+        console.error(e);
+        throw new Error('database error');
+    }
+}
+
+const deleteCrop=async(id:number):Promise<boolean>=>{
+    try{
+        const crop=await database.crop.delete({
+            where:{id}
+        })
+        return true;
+    }catch(e){
+        console.error(e);
+        throw new Error('database error')
+    }
+
+}
+
+export default {getAllCrops,findCropByName,getCropById,addCrop,updateCrop,deleteCrop};

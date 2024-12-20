@@ -40,5 +40,6 @@ const getUsersByNameAndRole=async({name,role}:{name:string,role:string}):Promise
         console.error(error);
         throw new Error('Database error.check logs')
     }
-}
+};
+
 export default {getUsersByNameAndRole};
