@@ -53,6 +53,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import customerService from '../service/customer.service';
 import { CustomerInput } from '../types';
 import { Customer } from '../model/customer';
+import { decode } from 'punycode';
 
 const customerRouter = express.Router();
 
@@ -71,10 +72,13 @@ const customerRouter = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/Customer'
  */
+const jwt = require("jsonwebtoken");
 
 customerRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const customers = await customerService.getAllCustomers();
+        try {
+        const request = req as Request & {auth: {name:string; role: string}}
+        const {name, role} = request.auth;
+        const customers = await customerService.getAllCustomers({name,role});
         res.status(200).json(customers);
     } catch (error) {
         res.status(400).json({ status: 'error', errorMessage: (error as Error).message });
@@ -138,6 +142,7 @@ customerRouter.post('/', async (req: Request, res: Response, next: NextFunction)
 
 customerRouter.get('/:name', async (req: Request, res: Response, next: NextFunction) => {
     try {
+        
         const customer = await customerService.getCustomerByName({ name: req.params.name });
         res.status(200).json(customer);
     } catch (error) {

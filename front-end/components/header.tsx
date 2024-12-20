@@ -8,8 +8,6 @@ import { useTranslation } from "next-i18next";
 const Header: React.FC = () => {
   const [loggedInUser, setLoggedInUser] = useState<String | null>(null);
   const { t, i18n } = useTranslation();
-  console.log(i18n.language);
-  console.log("reading");
   useEffect(() => {
     setLoggedInUser(sessionStorage.getItem("loggedInUser"));
   }, []);
@@ -21,7 +19,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="p-4 mb-1 border-bottom bg-success bg-gradient shadow-sm">
+    <header className="p-3 mb-2 border-bottom bg-success bg-gradient shadow-sm">
       <a className="fs-2 d-flex mb-2 mb-lg-0 text-white text-decoration-none">
         {/* Crop App */}
         {t("header.app.title")}

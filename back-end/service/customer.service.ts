@@ -3,8 +3,20 @@ import customerDb from "../repository/customer.db";
 import { CustomerInput } from "../types";
 import bcrypt from 'bcrypt';
 
-const getAllCustomers = async (): Promise<Customer[]> => {
-    return customerDb.getAllCustomers();
+const getAllCustomers = async ({name, role} : {name:string, role:string}): Promise<Customer[]> => {
+   
+     if(role==="customer"){
+        const customer= await customerDb.getCustomerByName({name})
+        console.log(customer)
+
+        return customer ? [customer] : [];
+        
+        }
+        
+        const customers=await customerDb.getAllCustomers();
+        return customers;
+       
+   
 }
 
 const addCustomer =async ({

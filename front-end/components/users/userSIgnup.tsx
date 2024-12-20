@@ -120,7 +120,7 @@ const UserSignup: React.FC = () => {
       selectedCrop
     );
     console.log(response);
-    if (response.name) {
+    if (response) {
       console.log("User added successfully!");
     } else {
       console.error("Failed to add user.");
@@ -199,7 +199,7 @@ const UserSignup: React.FC = () => {
           <div>
             {role === "seedSupplier" && (
               <>
-                <p>Please Choose the crop you will suppliy!</p>
+                <p>Please Choose the crop you will supply!</p>
                 <CropsOverviewTable
                   crops={crops}
                   selectedCrop={setSelectedCrop}
