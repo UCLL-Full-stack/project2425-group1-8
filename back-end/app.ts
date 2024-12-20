@@ -26,7 +26,7 @@ app.use(
         secret:process.env.JWT_SECRET || 'default_secret',
         algorithms:['HS256']
     }).unless({
-        path: ['/api-docs', /^\/api-docs\/.*/, '/login', '/status','/crops','/login/signUp',{ url:'/customers', method: 'POST' }],
+        path: ['/api-docs', /^\/api-docs\/.*/, '/login', '/status','/crops','/login/signUp',{ url:'/customers', method: 'POST' },{ url:'/seedSuppliers', method: 'POST' }],
     })
 );
 app.use('/customers',customerRouter);
