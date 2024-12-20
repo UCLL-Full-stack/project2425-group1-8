@@ -123,13 +123,10 @@ cropRouter.put('/:id', async (req: Request, res: Response, next: NextFunction) =
 cropRouter.delete('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const result = await cropService.deleteCrop(Number(req.params.id));
-        if (result) {
             res.status(200).json({ message: 'Crop successfully deleted' });
-        } else {
-            res.status(404).json({ message: 'Crop not found' });
-        }
+        
     } catch (error) {
-        next(error);
+        res.status(404).json({ message: 'Crop not found' });
     }
 });
 

@@ -1,5 +1,6 @@
 import { Crop } from "../model/crop";
 import cropDb from "../repository/crop.db";
+import database from "../repository/database";
 import { CropInput } from "../types";
 
 const getAllCrops=async():Promise<Crop[]> =>{
@@ -53,15 +54,11 @@ const updateCrop = async (id: number, updatedCrop: Crop): Promise<Crop | null> =
     }
 };
 
-const deleteCrop = async (id: number): Promise<boolean> => {
+const deleteCrop = async (id: number): Promise<void> => {
     try {
-        const result = await cropDb.deleteCrop(id);
-
-        if (result) {
-            return true;
-        } else {
-            return false;
-        }
+        await database.crop.delete({
+            where:{id}
+        })
     } catch (error) {
         console.error('Error deleting crop:', error);
         throw new Error('Error deleting crop in service layer');
