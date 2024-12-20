@@ -41,13 +41,10 @@ const updateCrop = async (id: number, updatedCrop: Crop): Promise<Crop | null> =
             growthDurationInMonths: updatedCrop.getgrowthDurationInMonths() || 0
         });
 
-        const result = await cropDb.updateCrop(id, newCrop);
+         await cropDb.updateCrop(id, newCrop);
+         return newCrop;
 
-        if (result) {
-            return result;
-        } else {
-            return null; 
-        }
+    
     } catch (error) {
         console.error(error);
         throw new Error('Database error while updating crop');

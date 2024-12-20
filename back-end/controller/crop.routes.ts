@@ -1,7 +1,62 @@
+/**
+ * @swagger
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ *   schemas:
+ *     Crop:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: Crop name.
+ *         purchasePrice:
+ *           type: string
+ *           description: Crop purchasePrice.
+ *         marketPrice:
+ *           type: string
+ *           description: Crop marketPrice.
+ *         totalYield:
+ *           type: string
+ *           description: Crop totalYield.
+ *         attentionRange:
+ *           type: string
+ *           description: Crop attentionRange.
+ *         growthDurationInMonths:
+ *           type: string
+ *           description: Crop growthDurationInMonths.
+ *     CropInput:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: Crop name.
+ *         purchasePrice:
+ *           type: string
+ *           description: Crop purchasePrice.
+ *         marketPrice:
+ *           type: string
+ *           description: Crop marketPrice.
+ *         totalYield:
+ *           type: string
+ *           description: Crop totalYield.
+ *         attentionRange:
+ *           type: string
+ *           description: Crop attentionRange.
+ *         growthDurationInMonths:
+ *           type: string
+ *           description: Crop growthDurationInMonths.
+ */
+
+
 import express, { NextFunction, Request, Response } from 'express';
 import cropService from '../service/crop.service';
 
 const cropRouter = express.Router();
+
 
 /**
  * @swagger
@@ -91,14 +146,11 @@ cropRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) =
 cropRouter.put('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const updatedCrop = req.body;
-        const crop = await cropService.updateCrop(Number(req.params.id), updatedCrop);
-        if (!crop) {
-            res.status(404).json({ message: 'Crop not found' });
-        } else {
+        const crop = await cropService.updateCrop(Number(req.params.id), updatedCrop);    
             res.status(200).json(crop);
-        }
+     
     } catch (error) {
-        next(error);
+        res.status(404).json({ message: 'Crop not found' });
     }
 });
 
